@@ -13,7 +13,9 @@ list_of_files = [
     f"{project_name}/utils/utility_functions.py",
     f"{project_name}/exception/__init__.py", 
     f"{project_name}/exception/exception.py", 
-    f"{project_name}/logging/__init__.py"
+    f"{project_name}/logging/__init__.py", 
+    f"{project_name}/pipeline/training_pipeline.py", 
+    f"{project_name}/pipeline/prediction_pipeline.py", 
     "app.py", 
     "notebooks/experiments.ipynb", 
     ".env", 
