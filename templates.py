@@ -5,7 +5,7 @@ project_name = "gold_prediction"
 
 list_of_files = [
     f"{project_name}/components/data_ingestion.py", 
-    f"{project_name}/__init__.py"
+    f"{project_name}/__init__.py",
     f"{project_name}/components/__init__.py", 
     f"{project_name}/components/data_transformation.py", 
     f"{project_name}/components/model_trainer.py", 
