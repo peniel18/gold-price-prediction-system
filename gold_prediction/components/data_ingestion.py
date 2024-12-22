@@ -1,8 +1,9 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException 
 import sys
-#import pandas as pd 
+import pandas as pd 
 from omegaconf import OmegaConf
+import yfinance as yf 
 
 
 data_ingestion_config = OmegaConf.load("configs/data_ingestion.yaml")
@@ -13,5 +14,63 @@ class DataIngestion:
     def __init__(self, dataIngestionConfig) -> None:
         self.dataIngestionConfig = dataIngestionConfig
 
+    def get_data_from_yfinance(self, ticker: str, 
+                               train_start_date: str, 
+                               train_end_date: str, 
+                               test_start_date: str, 
+                               test_end_date: str) -> tuple[pd.DataFrame, pd.DataFrame]:
+        """
+        gets gold data from yfinance using start dates and end dates 
+        
+        Args: 
+
+
+        Returns: 
+            A tuple of train and test data sets 
+
+
+        Raises
+            CustomException error if ticker or dates are invalid 
+        
+        """
+    
+        try: 
+            train_data = yf.download(
+                ticker, 
+                start=train_start_date, 
+                end=train_end_date
+            ) 
+
+            test_data = yf.download(
+                ticker, 
+                start=test_start_date,
+                end=test_end_date
+            )
+            # check if any of the data is empty 
+            if train_data.empty or test_data.empty:
+                raise ValueError("No data found for ticker")
+
+            return train_data, test_data
+        except Exception as e: 
+            logging.error("Error occurred in function get_data_from_yfinance")
+            raise CustomException(e, sys)
+
+
     def InitiateDataIngestion(self):
-        pass 
+        trianData, testData = self.get_data_from_yfinance(
+            ticker=self.dataIngestionConfig.DataIngestion.gold_ticker, 
+            train_start_date=self.dataIngestionConfig.DataIngestion.train_start_date, 
+            train_end_date=self.dataIngestionConfig.DataIngestion.train_end_date, 
+            test_start_date=self.dataIngestionConfig.DataIngestion.test_start_date, 
+            test_end_date=self.dataIngestionConfig.DataIngestion.test_end_date                   
+        )
+
+        print(trianData)
+    
+
+
+
+if __name__ == "__main__":
+    data_ingestion_config = OmegaConf.load("configs/data_ingestion.yaml")
+    dataIngestion = DataIngestion(dataIngestionConfig=data_ingestion_config)
+    dataIngestion.InitiateDataIngestion()

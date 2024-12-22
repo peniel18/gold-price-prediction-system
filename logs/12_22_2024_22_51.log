@@ -1,0 +1,4 @@
+[2024-12-22 22:52:23,654] 176 yfinance - ERROR - 
+1 Failed download:
+[2024-12-22 22:52:23,655] 189 yfinance - ERROR - ['GC=F']: YFPricesMissingError('$%ticker%: possibly delisted; no price data found  (1d 2024-01-01 -> 2023-12-31) (Yahoo error = "Invalid input - start date cannot be after end date. startDate = 1704085200, endDate = 1703998800")')
+[2024-12-22 22:52:23,661] 55 root - ERROR - Error occurred in function get_data_from_yfinance
