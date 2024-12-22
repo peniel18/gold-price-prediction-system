@@ -1,5 +1,6 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException 
+from gold_prediction.utils.utility_functions import save_dataframe_object
 import sys
 import pandas as pd 
 from omegaconf import OmegaConf
@@ -64,9 +65,18 @@ class DataIngestion:
             test_start_date=self.dataIngestionConfig.DataIngestion.test_start_date, 
             test_end_date=self.dataIngestionConfig.DataIngestion.test_end_date                   
         )
-
-        print(trianData)
-    
+        # save train object to artifacts 
+        save_dataframe_object(
+            data_object=trianData, 
+            path=self.dataIngestionConfig.Data_paths.train_data_path,
+            filename=self.dataIngestionConfig.Data_paths.train_file_name
+        )
+        # save test data objects to artifacts 
+        save_dataframe_object(
+            data_object=testData, 
+            path=self.dataIngestionConfig.Data_paths.test_data_path,
+            filename=self.dataIngestionConfig.Data_paths.test_data_path 
+        )
 
 
 

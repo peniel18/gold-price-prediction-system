@@ -4,3 +4,10 @@ DataIngestion:
   train_end_date: "2023-12-31"
   test_start_date: "2024-01-01"
   test_end_date: "2024-12-01"
+
+
+Data_paths:
+  train_file_name: "train.csv"
+  test_file_name: "test.csv"
+  train_data_path: "Artifacts/"
+  test_data_path: "Artifacts/"
