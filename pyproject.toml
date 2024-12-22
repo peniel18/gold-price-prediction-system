@@ -1,12 +1,16 @@
 [tool.poetry]
-name = "gold-prediction"
+name = "gold_prediction"
 version = "0.1.0"
 description = "A serveless solution for gold prediction using hopswork"
 authors = ["peniel18 <penieletornam18@gmail.com>"]
 readme = "README.md"
+package-mode = false 
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.8,<3.13"
+yfinance = "^0.2.51"
+pyaml = "^24.12.1"
+
 
 
 [build-system]

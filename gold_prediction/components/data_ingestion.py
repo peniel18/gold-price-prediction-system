@@ -1,8 +1,13 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException 
-
-
+import sys
+import pandas as pd 
+from omegaconf import OmegaConf
 
 
 class DataIngestion: 
-    pass 
+    def __init__(self, dataIngestionConfig) -> None:
+        self.dataIngestionConfig = dataIngestionConfig
+
+    def InitiateDataIngestion(self):
+        pass 

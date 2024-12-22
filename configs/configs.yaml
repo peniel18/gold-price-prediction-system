@@ -1,0 +1,6 @@
+data: 
+  artifacts_path: "Artifacts/"
+  train_path: "Artifacts/train.csv"
+  test_path: "Artifacts/test.csv"
+
+
