@@ -75,7 +75,7 @@ class DataIngestion:
         save_dataframe_object(
             data_object=testData, 
             path=self.dataIngestionConfig.Data_paths.test_data_path,
-            filename=self.dataIngestionConfig.Data_paths.test_data_path 
+            filename=self.dataIngestionConfig.Data_paths.test_file_name
         )
 
 
