@@ -7,8 +7,6 @@ from omegaconf import OmegaConf
 import yfinance as yf 
 
 
-data_ingestion_config = OmegaConf.load("configs/configs.yaml")
-print(data_ingestion_config)
 
 
 class DataIngestion: 
@@ -69,13 +67,13 @@ class DataIngestion:
         save_dataframe_object(
             data_object=trianData, 
             path=self.dataIngestionConfig.Data_paths.train_data_path,
-            filename=self.dataIngestionConfig.Data_paths.train_file_name
+            filename=self.dataIngestionConfig.Data_paths.train_file_name,
         )
         # save test data objects to artifacts 
         save_dataframe_object(
             data_object=testData, 
             path=self.dataIngestionConfig.Data_paths.test_data_path,
-            filename=self.dataIngestionConfig.Data_paths.test_file_name
+            filename=self.dataIngestionConfig.Data_paths.test_file_name, 
         )
 
 
