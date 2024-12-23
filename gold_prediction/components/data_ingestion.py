@@ -7,7 +7,7 @@ from omegaconf import OmegaConf
 import yfinance as yf 
 
 
-data_ingestion_config = OmegaConf.load("configs/data_ingestion.yaml")
+data_ingestion_config = OmegaConf.load("configs/configs.yaml")
 print(data_ingestion_config)
 
 
@@ -81,6 +81,6 @@ class DataIngestion:
 
 
 if __name__ == "__main__":
-    data_ingestion_config = OmegaConf.load("configs/data_ingestion.yaml")
+    data_ingestion_config = OmegaConf.load("configs/configs.yaml")
     dataIngestion = DataIngestion(dataIngestionConfig=data_ingestion_config)
     dataIngestion.InitiateDataIngestion()
