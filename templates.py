@@ -19,7 +19,7 @@ list_of_files = [
     "app.py", 
     "notebooks/experiments.ipynb", 
     ".env", 
-    "Artifacts", 
+    "Artifacts/", 
     "setup.py"
 ]
 
