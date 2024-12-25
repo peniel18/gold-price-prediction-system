@@ -19,7 +19,19 @@ class DataTransformation:
         df.iloc[2:].reset_index(drop=True)
         # rename the date column from price to date 
         df.rename(columns={"Price" : "Date"}, inplace=True)
-        # change the dtypes of the columns 
+        df.dropna(inplace=True)
+        # change the dtypes of the columns from object to floats
+        data_dtypes = {
+            "Close" : "float", 
+            "Open" : "float", 
+            "High" : "float", 
+            "Low" : "float", 
+            "Volume" : "float"
+        }
+
+        df = df.astype(data_dtypes)
+        df["Date"]  = pd.to_datetime(df["Date"])
+
         return df 
 
     def StartDataTransformation(self):
