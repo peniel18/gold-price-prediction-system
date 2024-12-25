@@ -19,6 +19,7 @@ class DataTransformation:
         df.iloc[2:].reset_index(drop=True)
         # rename the date column from price to date 
         df.rename(columns={"Price" : "Date"}, inplace=True)
+        # change the dtypes of the columns 
         return df 
 
     def StartDataTransformation(self):
