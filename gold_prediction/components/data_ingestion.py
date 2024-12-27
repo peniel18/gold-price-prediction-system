@@ -79,6 +79,6 @@ class DataIngestion:
 
 
 if __name__ == "__main__":
-    data_ingestion_config = OmegaConf.load("configs/configs.yaml")
+    data_ingestion_config = OmegaConf.load("configs/data_ingestion.yaml")
     dataIngestion = DataIngestion(dataIngestionConfig=data_ingestion_config)
     dataIngestion.InitiateDataIngestion()
