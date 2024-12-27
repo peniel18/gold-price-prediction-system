@@ -1,6 +1,8 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException
 import pandas as pd 
+import numpy as np 
+from typing import List
 from gold_prediction.utils.utility_functions import read_data
 
 
@@ -9,6 +11,7 @@ from gold_prediction.utils.utility_functions import read_data
 class DataTransformation:
     def __init__(self, dataTransformationConfig):
         self.dataTransConfig = dataTransformationConfig
+        self.project = None 
     
     def generate_features(self, df: pd.DataFrame) -> pd.DataFrame: 
         y = df.Close 
@@ -26,11 +29,37 @@ class DataTransformation:
         df["month"]  = df["Date"].dt.month
         df["year"]  = df["Date"].dt.month
         df["day"] = df["Date"].dt.day
-        df["day_week_name"] = df["Date"].dt.day_name()
+        df["dayOfweek_name"] = df["Date"].dt.day_name()
         df['is_weekend'] = np.where(df['day_week_name'].isin(['Sunday', 'Saturday']), 1, 0)
+        df["dayOfyear"] = df["Date"].dt.dayofyear
+        # df["weekOfyear"] = df["Date"].dt.weekofyear
+        df["quarter"] = df["Date"].dt.quarter
+
+        df["lag_1"] = df["Close"].shift(1)
+        df["lag_2"] = df["Close"].shift(2)
+        df["lag_3"] = df["Close"].shift(3)
+        df.dropna(inplace=True)
+            
+        # transform the is_weekend column to labels 
+
+
         
         return df 
 
+    def label_encode(self, df: pd.DataFrame, feature: str) -> pd.Series:
+        daysOfweek = {
+                'Sunday':0,
+                'Monday':1,
+                'Tuesday' : 2,
+                'Wednesday' : 3,
+                'Thursday' : 4,
+                'Friday' : 5,
+                'Saturday' :6
+            }
+
+        df[feature] = df[feature].replace(daysOfweek) 
+        return df[feature]
+        
 
     def data_cleaning(self, df: pd.DataFrame) -> pd.DataFrame:
         # drop the first two rows 
@@ -50,7 +79,9 @@ class DataTransformation:
         df = df.astype(data_dtypes)
         df["Date"]  = pd.to_datetime(df["Date"])
 
-        return df 
+        return df
 
-    def StartDataTransformation(self):
+
+
+    def IntializeDataTransformation(self):
         pass 
