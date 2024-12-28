@@ -83,7 +83,7 @@ class DataTransformation:
         try: 
             logging.info("Data Cleaning has started")
             # drop the first two rows 
-            df.iloc[2:].reset_index(drop=True)
+            df = df.iloc[2:].reset_index(drop=True)
             # rename the date column from price to date 
             df.rename(columns={"Price" : "Date"}, inplace=True)
             df.dropna(inplace=True)
