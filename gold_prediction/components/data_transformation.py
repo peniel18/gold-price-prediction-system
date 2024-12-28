@@ -5,6 +5,7 @@ import sys
 import numpy as np 
 from typing import List
 from omegaconf import OmegaConf
+import hopsworks 
 from gold_prediction.utils.utility_functions import read_data
 
 
@@ -13,9 +14,10 @@ from gold_prediction.utils.utility_functions import read_data
 class DataTransformation:
     def __init__(self, dataTransformationConfig):
         self.dataTransConfig = dataTransformationConfig
-        self.Hopswork_project = None 
-        
-    
+        self.Hopswork_project = hopsworks.project(
+            project
+        )
+
 
     def label_encode(self, df: pd.DataFrame, feature: str) -> pd.Series:
         """
@@ -68,8 +70,7 @@ class DataTransformation:
             df["lag_2"] = df["Close"].shift(2)
             df["lag_3"] = df["Close"].shift(3)
             df.dropna(inplace=True)
-                
-            # transform the is_weekend column to labels 
+             
             
             logging.info("Features Succesfully engineered")
             return df 
@@ -124,13 +125,19 @@ class DataTransformation:
             # create features 
             trainData = self.generate_features(trainData)
             testData = self.generate_features(testData)
-            print(trainData.isnull().sum())
-            print(testData.isnull().sum())
-            # push features to hopswork 
+            # hopswork feature store 
+            feature_group = self.Hopswork_project.get_feature_store()
+            feature_store = feature_group.get_or_create_feature_group(
+                name = None, 
+                version = None, 
+                primary_key = None, 
+                online = None, 
+                description = "Gold Price Prediction Features"
+            )
+            data = None 
+            feature_group.insert(data)
+            # save features to artifacts folder 
 
-        
-
-        # generate features 
 
         except Exception as e: 
             logging.error("Error Occurred during data transformation ")
