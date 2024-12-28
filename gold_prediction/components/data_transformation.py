@@ -59,7 +59,7 @@ class DataTransformation:
             df["day"] = df["Date"].dt.day
             df["dayOfweek"] = df["Date"].dt.day_name()
             df["dayOfweek"] = self.label_encode(df, "dayOfweek")
-            df['is_weekend'] = np.where(df['day_week_name'].isin(['Sunday', 'Saturday']), 1, 0)
+            df['is_weekend'] = np.where(df['dayOfweek'].isin(['Sunday', 'Saturday']), 1, 0)
             df["dayOfyear"] = df["Date"].dt.dayofyear
             # df["weekOfyear"] = df["Date"].dt.weekofyear
             df["quarter"] = df["Date"].dt.quarter
@@ -121,7 +121,12 @@ class DataTransformation:
             # clean data 
             trainData = self.data_cleaning(trainData)
             testData = self.data_cleaning(testData) 
-            print(trainData)
+            # create features 
+            trainData = self.generate_features(trainData)
+            testData = self.generate_features(testData)
+            print(trainData.isnull().sum())
+            print(testData.isnull().sum())
+            # push features to hopswork 
 
         
 
