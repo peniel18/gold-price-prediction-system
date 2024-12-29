@@ -3,19 +3,20 @@ from gold_prediction.exception.exception import CustomException
 import pandas as pd 
 import sys
 import numpy as np 
-from typing import List
+import os 
+from dotenv import load_dotenv 
 from omegaconf import OmegaConf
 import hopsworks 
-from gold_prediction.utils.utility_functions import read_data
 
-
+load_dotenv()
+HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
 
 
 class DataTransformation:
     def __init__(self, dataTransformationConfig):
         self.dataTransConfig = dataTransformationConfig
-        self.Hopswork_project = hopsworks.project(
-            project
+        self.Hopswork_project = hopsworks.login(
+            api_key_value = HOPSWORKS_API
         )
 
 
@@ -148,4 +149,4 @@ class DataTransformation:
 if __name__ == "__main__":
     config = OmegaConf.load("configs/data_transformation.yaml")
     dataTrans = DataTransformation(dataTransformationConfig=config)
-    dataTrans.IntializeDataTransformation()
+    #dataTrans.IntializeDataTransformation()
