@@ -108,8 +108,6 @@ class DataTransformation:
             raise CustomException(e, sys)
 
 
-
-
     def IntializeDataTransformation(self):
         """
         Initialize Data Transformation Process 
@@ -126,17 +124,31 @@ class DataTransformation:
             # create features 
             trainData = self.generate_features(trainData)
             testData = self.generate_features(testData)
+
+            print(trainData.columns)
             # hopswork feature store 
-            feature_group = self.Hopswork_project.get_feature_store()
-            feature_store = feature_group.get_or_create_feature_group(
-                name = None, 
-                version = None, 
-                primary_key = None, 
-                online = None, 
+            feature_store = self.Hopswork_project.get_feature_store()
+            train_feature_group = feature_store.get_or_create_feature_group(
+                name = "Gold Price Prediction Train Data", 
+                version = 1, 
+                primary_key = ["Date"], 
+                #online = None, 
                 description = "Gold Price Prediction Features"
             )
-            data = None 
-            feature_group.insert(data)
+
+            test_feature_group = feature_store.get_or_create_feature_group(
+                name = "Gold Price Prediction Test Data", 
+                version=1, 
+                description="Gold price dataset",
+                primary_key = ["Date"]
+
+            )
+            train_feature_group.insert(trainData)
+            test_feature_group.inset(testData)
+            # update features descriptions 
+
+
+
             # save features to artifacts folder 
 
 
@@ -149,4 +161,4 @@ class DataTransformation:
 if __name__ == "__main__":
     config = OmegaConf.load("configs/data_transformation.yaml")
     dataTrans = DataTransformation(dataTransformationConfig=config)
-    #dataTrans.IntializeDataTransformation()
+    dataTrans.IntializeDataTransformation()
