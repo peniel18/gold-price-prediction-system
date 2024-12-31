@@ -143,20 +143,12 @@ class DataTransformation:
         try: 
             logging.info("Updates Feature Descriptions")
             for feature, description in descriptions.items():
-            
-            
-                pass 
-
-
+                if feature in feature_group.features: 
+                    feature_group.update_feature_description(feature, description)
 
         except Exception as e: 
             logging.error("Failed to update Feature Descritions")
             raise CustomException(e, sys)
-
-
-
-
-
 
 
     def IntializeDataTransformation(self):
@@ -199,7 +191,7 @@ class DataTransformation:
             train_feature_group.insert(trainData)
             test_feature_group.insert(testData)
             # update features descriptions 
-            data_dictionary = {
+            data_descriptions = {
                 # Time-Related Features
                 'Date': 'The timestamp or date of the recorded data point',
                 'month': 'The month number (1-12) extracted from the date',
@@ -232,10 +224,19 @@ class DataTransformation:
             }
 
 
+            self.update_feature_description(
+                feature_group=train_feature_group, 
+                descriptions=data_descriptions
+            )
 
-
+            self.update_feature_description(
+                feature_group=test_feature_group, 
+                descriptions=data_descriptions
+            )
 
             # save features to artifacts folder 
+
+
 
 
         except Exception as e: 
