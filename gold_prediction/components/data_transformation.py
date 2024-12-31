@@ -129,7 +129,7 @@ class DataTransformation:
             # hopswork feature store 
             feature_store = self.Hopswork_project.get_feature_store()
             train_feature_group = feature_store.get_or_create_feature_group(
-                name = "Gold Price Prediction Train Data", 
+                name = "gold_price_prediction_train_data", 
                 version = 1, 
                 primary_key = ["Date"], 
                 #online = None, 
@@ -137,14 +137,14 @@ class DataTransformation:
             )
 
             test_feature_group = feature_store.get_or_create_feature_group(
-                name = "Gold Price Prediction Test Data", 
+                name = "gold_price_prediction_test_data", 
                 version=1, 
                 description="Gold price dataset",
                 primary_key = ["Date"]
 
             )
             train_feature_group.insert(trainData)
-            test_feature_group.inset(testData)
+            test_feature_group.insert(testData)
             # update features descriptions 
 
 
