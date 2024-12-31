@@ -113,14 +113,12 @@ class DataTransformation:
     def create_or_get_feature_group(self, 
                                     feature_store, 
                                     name, 
-                                    version, 
                                     description, 
                                     primary_key: List[str]):
         try: 
             logging.info("Getting Hopsworks Feature Group")
             feature_group = feature_store.get_feature_group(
                 name=name, 
-                #version=version, 
                 description=description, 
                 primary_key=primary_key
             )
@@ -130,12 +128,33 @@ class DataTransformation:
             # create a feature group for the first time 
             feature_group = feature_store.create_feature_group(
                 name=name, 
-                #version=version, 
                 description=description, 
                 primary_key=primary_key, 
             )
             logging.info("Feature Group Succesfully Created")
             return feature_group 
+
+    
+    def update_feature_description(self, feature_group, descriptions: dict):
+        """
+        Updates features for specific feature group 
+
+        """
+        try: 
+            logging.info("Updates Feature Descriptions")
+            for feature, description in descriptions.items():
+            
+            
+                pass 
+
+
+
+        except Exception as e: 
+            logging.error("Failed to update Feature Descritions")
+            raise CustomException(e, sys)
+
+
+
 
 
 
@@ -164,22 +183,17 @@ class DataTransformation:
             train_feature_group = self.create_or_get_feature_group(
                 feature_store=feature_store, 
                 name = "gold_price_prediction_train_data", 
-                version = 2, 
                 primary_key = ["Date"],  
                 description = "Gold Price Prediction Features" 
             )
 
             test_feature_group = self.create_or_get_feature_group(
                 feature_store=feature_store, 
-                name = "gold_price_prediction_test_data", 
-                version=2, 
+                name = "gold_price_prediction_test_data",  
                 description="Gold price dataset",
                 primary_key = ["Date"]
 
             )
-            
-            
-            
             
             
             train_feature_group.insert(trainData)
