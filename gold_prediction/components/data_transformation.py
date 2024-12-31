@@ -7,16 +7,18 @@ import os
 from dotenv import load_dotenv 
 from omegaconf import OmegaConf
 import hopsworks 
+from typing import List 
 
 load_dotenv()
-HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
+
 
 
 class DataTransformation:
     def __init__(self, dataTransformationConfig):
         self.dataTransConfig = dataTransformationConfig
+        self.HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
         self.Hopswork_project = hopsworks.login(
-            api_key_value = HOPSWORKS_API
+            api_key_value = self.HOPSWORKS_API
         )
 
 
@@ -58,11 +60,12 @@ class DataTransformation:
             
             # lag and time features 
             df["month"]  = df["Date"].dt.month
-            df["year"]  = df["Date"].dt.month
+            df["year"]  = df["Date"].dt.year
             df["day"] = df["Date"].dt.day
             df["dayOfweek"] = df["Date"].dt.day_name()
-            df["dayOfweek"] = self.label_encode(df, "dayOfweek")
+            # df["dayOfweek"] = self.label_encode(df, "dayOfweek")
             df['is_weekend'] = np.where(df['dayOfweek'].isin(['Sunday', 'Saturday']), 1, 0)
+            df["dayOfweek"] = self.label_encode(df, "dayOfweek")
             df["dayOfyear"] = df["Date"].dt.dayofyear
             # df["weekOfyear"] = df["Date"].dt.weekofyear
             df["quarter"] = df["Date"].dt.quarter
@@ -106,6 +109,35 @@ class DataTransformation:
         except Exception as e: 
             logging.error("Error occurred during data cleaning")
             raise CustomException(e, sys)
+    
+    def create_or_get_feature_group(self, 
+                                    feature_store, 
+                                    name, 
+                                    version, 
+                                    description, 
+                                    primary_key: List[str]):
+        try: 
+            logging.info("Getting Hopsworks Feature Group")
+            feature_group = feature_store.get_feature_group(
+                name=name, 
+                #version=version, 
+                description=description, 
+                primary_key=primary_key
+            )
+            return feature_group
+        except:
+            logging.info("Creating Hopworks Feature Group")
+            # create a feature group for the first time 
+            feature_group = feature_store.create_feature_group(
+                name=name, 
+                #version=version, 
+                description=description, 
+                primary_key=primary_key, 
+            )
+            logging.info("Feature Group Succesfully Created")
+            return feature_group 
+
+
 
 
     def IntializeDataTransformation(self):
@@ -128,24 +160,64 @@ class DataTransformation:
             print(trainData.columns)
             # hopswork feature store 
             feature_store = self.Hopswork_project.get_feature_store()
-            train_feature_group = feature_store.get_or_create_feature_group(
+            
+            train_feature_group = self.create_or_get_feature_group(
+                feature_store=feature_store, 
                 name = "gold_price_prediction_train_data", 
-                version = 1, 
-                primary_key = ["Date"], 
-                #online = None, 
-                description = "Gold Price Prediction Features"
+                version = 2, 
+                primary_key = ["Date"],  
+                description = "Gold Price Prediction Features" 
             )
 
-            test_feature_group = feature_store.get_or_create_feature_group(
+            test_feature_group = self.create_or_get_feature_group(
+                feature_store=feature_store, 
                 name = "gold_price_prediction_test_data", 
-                version=1, 
+                version=2, 
                 description="Gold price dataset",
                 primary_key = ["Date"]
 
             )
+            
+            
+            
+            
+            
             train_feature_group.insert(trainData)
             test_feature_group.insert(testData)
             # update features descriptions 
+            data_dictionary = {
+                # Time-Related Features
+                'Date': 'The timestamp or date of the recorded data point',
+                'month': 'The month number (1-12) extracted from the date',
+                'year': 'The year extracted from the date',
+                'day': 'The day of the month (1-31)',
+                'day_week_name': 'Name of the day of the week (Monday-Sunday)',
+                'is_weekend': 'Boolean indicator for whether the day is a weekend (0 for weekday, 1 for weekend)',
+                'dayOfyear': 'The day number within the year (1-365/366)',
+                'quarter': 'The quarter of the year (1-4)',
+                
+                # Price Features
+                'Close': 'The closing price of gold for the given day',
+                'High': 'The highest price of gold reached during the trading day',
+                'Low': 'The lowest price of gold reached during the trading day',
+                'Open': 'The opening price of gold for the trading day',
+                'Volume': 'The total trading volume of gold for that day',
+                
+                # Statistical Features
+                'Agg_mean': 'Mean price calculated over a specific window period',
+                'Agg_max': 'Maximum price over a specific window period',
+                'Agg_std': 'Standard deviation of prices over a specific window period',
+                'Agg_min': 'Minimum price over a specific window period',
+                'Kurt': 'Kurtosis measure, indicating the "tailedness" of the price distribution',
+                'skewness': 'Measure of asymmetry in the price distribution',
+                
+                # Lagged Features
+                'lag_1': 'Price value from 1 time period ago',
+                'lag_2': 'Price value from 2 time periods ago',
+                'lag_3': 'Price value from 3 time periods ago'
+            }
+
+
 
 
 
