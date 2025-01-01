@@ -1,0 +1,15 @@
+[2024-12-30 23:57:13,016] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2024-12-30 23:57:16,039] 52 hopsworks_common.client.external - INFO - Initializing external client
+[2024-12-30 23:57:16,039] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
+[2024-12-30 23:57:18,313] 134 hsfs.engine.python - INFO - Python Engine initialized.
+[2024-12-30 23:57:20,664] 117 root - INFO - Data Transformation has started
+[2024-12-30 23:57:20,683] 86 root - INFO - Data Cleaning has started
+[2024-12-30 23:57:20,690] 103 root - INFO - Data Cleaning is succesfully completed
+[2024-12-30 23:57:20,691] 86 root - INFO - Data Cleaning has started
+[2024-12-30 23:57:20,696] 103 root - INFO - Data Cleaning is succesfully completed
+[2024-12-30 23:57:20,696] 46 root - INFO - Feature engineering has started
+[2024-12-30 23:57:20,713] 76 root - INFO - Features Succesfully engineered
+[2024-12-30 23:57:20,714] 46 root - INFO - Feature engineering has started
+[2024-12-30 23:57:20,729] 76 root - INFO - Features Succesfully engineered
+[2024-12-30 23:57:42,844] 156 root - ERROR - Error Occurred during data transformation 
+[2024-12-30 23:57:43,326] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.

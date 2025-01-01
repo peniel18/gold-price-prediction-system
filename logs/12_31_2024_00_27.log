@@ -1,0 +1,21 @@
+[2024-12-31 00:27:54,553] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2024-12-31 00:27:57,498] 52 hopsworks_common.client.external - INFO - Initializing external client
+[2024-12-31 00:27:57,498] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
+[2024-12-31 00:27:59,653] 134 hsfs.engine.python - INFO - Python Engine initialized.
+[2024-12-31 00:28:05,931] 148 root - INFO - Data Transformation has started
+[2024-12-31 00:28:05,953] 88 root - INFO - Data Cleaning has started
+[2024-12-31 00:28:05,961] 105 root - INFO - Data Cleaning is succesfully completed
+[2024-12-31 00:28:05,962] 88 root - INFO - Data Cleaning has started
+[2024-12-31 00:28:05,968] 105 root - INFO - Data Cleaning is succesfully completed
+[2024-12-31 00:28:05,968] 47 root - INFO - Feature engineering has started
+[2024-12-31 00:28:05,987] 78 root - INFO - Features Succesfully engineered
+[2024-12-31 00:28:05,988] 47 root - INFO - Feature engineering has started
+[2024-12-31 00:28:06,004] 78 root - INFO - Features Succesfully engineered
+[2024-12-31 00:28:06,310] 119 root - INFO - Getting Hopsworks Feature Group
+[2024-12-31 00:28:06,311] 128 root - INFO - Creating Hopworks Feature Group
+[2024-12-31 00:28:06,312] 136 root - INFO - Feature Group Succesfully Created
+[2024-12-31 00:28:06,313] 119 root - INFO - Getting Hopsworks Feature Group
+[2024-12-31 00:28:06,313] 128 root - INFO - Creating Hopworks Feature Group
+[2024-12-31 00:28:06,314] 136 root - INFO - Feature Group Succesfully Created
+[2024-12-31 00:28:06,599] 227 root - ERROR - Error Occurred during data transformation 
+[2024-12-31 00:28:07,389] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.

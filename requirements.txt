@@ -2,5 +2,6 @@ pandas
 numpy 
 yfinance 
 pyaml 
-hopsworks 
+hopsworks[python] 
+python-dotenv
 

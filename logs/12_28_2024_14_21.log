@@ -1,0 +1,10 @@
+[2024-12-28 14:21:32,764] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2024-12-28 14:21:33,225] 117 root - INFO - Data Transformation has started
+[2024-12-28 14:21:33,242] 84 root - INFO - Data Cleaning has started
+[2024-12-28 14:21:33,253] 101 root - INFO - Data Cleaning is succesfully completed
+[2024-12-28 14:21:33,253] 84 root - INFO - Data Cleaning has started
+[2024-12-28 14:21:33,259] 101 root - INFO - Data Cleaning is succesfully completed
+[2024-12-28 14:21:33,260] 43 root - INFO - Feature engineering has started
+[2024-12-28 14:21:33,331] 74 root - INFO - Features Succesfully engineered
+[2024-12-28 14:21:33,332] 43 root - INFO - Feature engineering has started
+[2024-12-28 14:21:33,350] 74 root - INFO - Features Succesfully engineered

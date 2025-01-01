@@ -1,0 +1,9 @@
+train_data:
+  path: "Artifacts/train.csv"
+
+test_data:
+  path: "Artifacts/test.csv"
+
+features_path: 
+  train_features: "Artifacts/train_features.csv"
+  test_features: "Artifacts/test_features.csv"

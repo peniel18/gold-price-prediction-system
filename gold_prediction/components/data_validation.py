@@ -6,12 +6,21 @@ import pandas as pd
 
 
 
-
-
-
-
 # validate columns 
 # calculate data drift 
 # validate the number of features created
 class DataValidation:
-    pass 
+    def __init__(self, dataValidationConfig):
+        self.dataValidationConfig = dataValidationConfig 
+
+    def check_data_drift(self):
+        pass 
+    
+    def validateFeatureColumns(self):
+        pass 
+
+    def InitiateDataValidaton(self):
+        pass 
+
+
+            

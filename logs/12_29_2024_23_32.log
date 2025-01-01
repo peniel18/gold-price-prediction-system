@@ -1,0 +1,11 @@
+[2024-12-29 23:32:13,181] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2024-12-29 23:32:14,411] 119 root - INFO - Data Transformation has started
+[2024-12-29 23:32:14,432] 86 root - INFO - Data Cleaning has started
+[2024-12-29 23:32:14,440] 103 root - INFO - Data Cleaning is succesfully completed
+[2024-12-29 23:32:14,441] 86 root - INFO - Data Cleaning has started
+[2024-12-29 23:32:14,446] 103 root - INFO - Data Cleaning is succesfully completed
+[2024-12-29 23:32:14,447] 46 root - INFO - Feature engineering has started
+[2024-12-29 23:32:14,467] 76 root - INFO - Features Succesfully engineered
+[2024-12-29 23:32:14,468] 46 root - INFO - Feature engineering has started
+[2024-12-29 23:32:14,484] 76 root - INFO - Features Succesfully engineered
+[2024-12-29 23:32:14,485] 157 root - ERROR - Error Occurred during data transformation 

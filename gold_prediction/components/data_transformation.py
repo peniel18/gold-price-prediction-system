@@ -116,6 +116,7 @@ class DataTransformation:
                                     description, 
                                     primary_key: List[str]):
         try: 
+            # when the feature group already exists 
             logging.info("Getting Hopsworks Feature Group")
             feature_group = feature_store.get_feature_group(
                 name=name, 
@@ -224,15 +225,15 @@ class DataTransformation:
             }
 
 
-            self.update_feature_description(
-                feature_group=train_feature_group, 
-                descriptions=data_descriptions
-            )
+            #self.update_feature_description(
+            #    feature_group=train_feature_group, 
+            #    descriptions=data_descriptions
+            #)
 
-            self.update_feature_description(
-                feature_group=test_feature_group, 
-                descriptions=data_descriptions
-            )
+            #self.update_feature_description(
+            #    feature_group=test_feature_group, 
+            #    descriptions=data_descriptions
+            #)
 
             # save features to artifacts folder 
 
