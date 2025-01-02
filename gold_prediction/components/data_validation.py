@@ -1,6 +1,7 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException 
 from evidently.dashboard import Dashboard 
+from scipy.stats import ks_2samp
 import sys 
 import pandas as pd 
 import json 
@@ -15,7 +16,7 @@ class DataValidation:
     def __init__(self, dataValidationConfig):
         self.dataValidationConfig = dataValidationConfig 
 
-    def evaluate_data_drift(self, reference, production, column_mapping):
+    def evaluate_data_drift(self, base_dataset, incoming_dataset, threshold):
         """
         Calculates Data drift for incoming data 
 
@@ -24,19 +25,21 @@ class DataValidation:
 
 
         """
-        
-        data_drift_profile = Profile(sections=[DataDriftProfileSection])
-        data_drift_profile.calculate(reference, production, column_mapping=column_mapping)
-        drift_report = data_drift_profile.json()
-        json_report = json.load(drift_report)
+        try: 
+            logging.info("Checking data drift")
+            data_drift_report = {}
+            dataDrift: bool = False 
+            for column in base_dataset.columns: 
+                base = base_dataset[column]
+                current = incoming_dataset[column]
+                ks_stat, p_value = ks_2samp(base, current)
+                dataDrift = ks_stat > threshold 
+                # log drifts of each colum to mlflow 
 
-        drifts = []
-        for feature in column_mapping["numerical_features"] + column_mapping["categorical_features"]: 
-            drifts.append((feature, json_report['data_drift']['data']['metrics'][feature]['p_value']))
+            return dataDrift
 
-        return drifts
-
-
+        except Exception as e: 
+            raise CustomException(e, sys)
 
     def validateFeatureColumns(self):
         pass 
