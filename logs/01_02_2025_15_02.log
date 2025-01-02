@@ -17,3 +17,5 @@
 [2025-01-02 15:02:13,859] 121 root - INFO - Getting Hopsworks Feature Group
 [2025-01-02 15:02:13,859] 129 root - INFO - Creating Hopworks Feature Group
 [2025-01-02 15:02:13,860] 136 root - INFO - Feature Group Succesfully Created
+[2025-01-02 15:02:56,876] 255 root - ERROR - Error Occurred during data transformation 
+[2025-01-02 15:02:56,899] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.
