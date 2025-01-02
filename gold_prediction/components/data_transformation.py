@@ -1,4 +1,5 @@
 from gold_prediction.logging.logger import logging
+from gold_prediction.utils.utility_functions import save_dataframe_object
 from gold_prediction.exception.exception import CustomException
 import pandas as pd 
 import sys
@@ -236,8 +237,18 @@ class DataTransformation:
             #)
 
             # save features to artifacts folder 
-
-
+            save_dataframe_object(
+                data_object=trainData, 
+                filename="train.csv",
+                path=self.dataTransConfig.train_data.transformed_data_path,
+                index=False
+            )
+            save_dataframe_object(
+                data_object=testData, 
+                filename="test.csv",
+                path=self.dataTransConfig.test_data.transformed_data_path,
+                index=False
+            )
 
 
         except Exception as e: 

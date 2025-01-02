@@ -1,8 +1,11 @@
 train_data:
   path: "Artifacts/train.csv"
+  transformed_data_path: "Artifacts/Transformed/"
 
 test_data:
   path: "Artifacts/test.csv"
+  transformed_data_path: "Artifacts/Transformed/"
+
 
 features_path: 
   train_features: "Artifacts/train_features.csv"

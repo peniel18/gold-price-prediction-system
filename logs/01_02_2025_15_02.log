@@ -1,0 +1,19 @@
+[2025-01-02 15:02:02,767] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-02 15:02:06,918] 52 hopsworks_common.client.external - INFO - Initializing external client
+[2025-01-02 15:02:06,919] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
+[2025-01-02 15:02:11,032] 134 hsfs.engine.python - INFO - Python Engine initialized.
+[2025-01-02 15:02:13,509] 162 root - INFO - Data Transformation has started
+[2025-01-02 15:02:13,529] 90 root - INFO - Data Cleaning has started
+[2025-01-02 15:02:13,539] 107 root - INFO - Data Cleaning is succesfully completed
+[2025-01-02 15:02:13,540] 90 root - INFO - Data Cleaning has started
+[2025-01-02 15:02:13,549] 107 root - INFO - Data Cleaning is succesfully completed
+[2025-01-02 15:02:13,549] 49 root - INFO - Feature engineering has started
+[2025-01-02 15:02:13,570] 80 root - INFO - Features Succesfully engineered
+[2025-01-02 15:02:13,571] 49 root - INFO - Feature engineering has started
+[2025-01-02 15:02:13,589] 80 root - INFO - Features Succesfully engineered
+[2025-01-02 15:02:13,856] 121 root - INFO - Getting Hopsworks Feature Group
+[2025-01-02 15:02:13,856] 129 root - INFO - Creating Hopworks Feature Group
+[2025-01-02 15:02:13,858] 136 root - INFO - Feature Group Succesfully Created
+[2025-01-02 15:02:13,859] 121 root - INFO - Getting Hopsworks Feature Group
+[2025-01-02 15:02:13,859] 129 root - INFO - Creating Hopworks Feature Group
+[2025-01-02 15:02:13,860] 136 root - INFO - Feature Group Succesfully Created

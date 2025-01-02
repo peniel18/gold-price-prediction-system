@@ -9,10 +9,14 @@ def save_dataframe_object(data_object: pd.DataFrame,
                           path: str, 
                           filename: str, 
                           index: bool = True) -> None: 
+    os.makedirs(path, exist_ok=True)
     file_path = os.path.join(path, filename)
     data_object.to_csv(file_path, index=index)
 
+    
 
 def read_data(filepath: str) -> pd.DataFrame:
     data = pd.read_csv(filepath)
-    return data 
+    return data
+
+
