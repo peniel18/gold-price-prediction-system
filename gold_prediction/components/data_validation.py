@@ -1,12 +1,12 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException 
-#from evidently.dashboard import Dashboard 
 from scipy.stats import ks_2samp
 from omegaconf import OmegaConf
-from typing import List, Tuple
+from typing import List
 import sys 
 import pandas as pd 
-import json 
+import mlflow 
+
 
 
 
@@ -55,11 +55,6 @@ class DataValidation:
 
                 data_drift_report.append(column_drift)
 
-            # log experiments to mlflow 
-
-
-
-
             return data_drift_report
         
         except Exception as e: 
@@ -83,8 +78,11 @@ class DataValidation:
             )
             print(DataDriftReport)
 
+            for column in DataDriftReport:
+                print(column)
+
         except Exception as e: 
-            logging.error("")
+            logging.error("Error Occurred during Data Validation")
             raise CustomException(e, sys)
 
 
