@@ -1,4 +1,0 @@
-[2024-12-29 23:18:42,249] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
-[2024-12-29 23:18:43,488] 52 hopsworks_common.client.external - INFO - Initializing external client
-[2024-12-29 23:18:43,488] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
-[2024-12-29 23:18:47,066] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.

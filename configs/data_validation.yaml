@@ -1,19 +1,11 @@
 train_data:
-  path: "Artifacts/train.csv"
+  path: "Artifacts/Transformed/train.csv"
   transformed_data_path: "Artifacts/Transformed/"
 
 test_data:
-  path: "Artifacts/test.csv"
+  path: "Artifacts/Transformed/test.csv"
   transformed_data_path: "Artifacts/Transformed/"
 
-
-features_path: 
-  train_features: "Artifacts/train_features.csv"
-  test_features: "Artifacts/test_features.csv"
-
-
-
-# Time-Related Features
 Columns: 
   Date: The timestamp or date of the recorded data point
   month: The month number (1-12) extracted from the date

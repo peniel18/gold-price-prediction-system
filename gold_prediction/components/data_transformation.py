@@ -193,37 +193,6 @@ class DataTransformation:
             train_feature_group.insert(trainData)
             test_feature_group.insert(testData)
             # update features descriptions 
-            data_descriptions = {
-                # Time-Related Features
-                'Date': 'The timestamp or date of the recorded data point',
-                'month': 'The month number (1-12) extracted from the date',
-                'year': 'The year extracted from the date',
-                'day': 'The day of the month (1-31)',
-                'day_week_name': 'Name of the day of the week (Monday-Sunday)',
-                'is_weekend': 'Boolean indicator for whether the day is a weekend (0 for weekday, 1 for weekend)',
-                'dayOfyear': 'The day number within the year (1-365/366)',
-                'quarter': 'The quarter of the year (1-4)',
-                
-                # Price Features
-                'Close': 'The closing price of gold for the given day',
-                'High': 'The highest price of gold reached during the trading day',
-                'Low': 'The lowest price of gold reached during the trading day',
-                'Open': 'The opening price of gold for the trading day',
-                'Volume': 'The total trading volume of gold for that day',
-                
-                # Statistical Features
-                'Agg_mean': 'Mean price calculated over a specific window period',
-                'Agg_max': 'Maximum price over a specific window period',
-                'Agg_std': 'Standard deviation of prices over a specific window period',
-                'Agg_min': 'Minimum price over a specific window period',
-                'Kurt': 'Kurtosis measure, indicating the "tailedness" of the price distribution',
-                'skewness': 'Measure of asymmetry in the price distribution',
-                
-                # Lagged Features
-                'lag_1': 'Price value from 1 time period ago',
-                'lag_2': 'Price value from 2 time periods ago',
-                'lag_3': 'Price value from 3 time periods ago'
-            }
 
 
             #self.update_feature_description(

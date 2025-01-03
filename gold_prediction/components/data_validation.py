@@ -72,14 +72,20 @@ class DataValidation:
         return None 
 
     def InitiateDataValidaton(self):
-        trainData = pd.read_csv(self.dataValidationConfig.train_data.path)
-        testData =  pd.read_csv(self.dataValidationConfig.test_data.path)
+        try: 
+            logging.info("Data Validation has started")
+            trainData = pd.read_csv(self.dataValidationConfig.train_data.path)
+            testData =  pd.read_csv(self.dataValidationConfig.test_data.path)
 
-        DataDriftReport = self.evaluate_data_drift(
-            base_dataset=trainData, 
-            incoming_dataset=testData, 
-        )
-        print(DataDriftReport)
+            DataDriftReport = self.evaluate_data_drift(
+                base_dataset=trainData, 
+                incoming_dataset=testData, 
+            )
+            print(DataDriftReport)
+
+        except Exception as e: 
+            logging.error("")
+            raise CustomException(e, sys)
 
 
         

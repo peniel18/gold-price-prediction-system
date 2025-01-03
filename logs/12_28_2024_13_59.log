@@ -1,5 +1,0 @@
-[2024-12-28 13:59:23,616] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
-[2024-12-28 13:59:37,467] 117 root - INFO - Data Transformation has started
-[2024-12-28 13:59:37,725] 84 root - INFO - Data Cleaning has started
-[2024-12-28 13:59:38,064] 105 root - ERROR - Error occurred during data cleaning
-[2024-12-28 13:59:38,064] 131 root - ERROR - Error Occurred during data transformation 
