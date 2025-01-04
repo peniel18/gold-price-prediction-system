@@ -58,15 +58,18 @@ class DataValidation:
 
 
     def track_data_drift_with_mlflow(drift_results: List[dict]) -> None: 
-        pass 
+        mlflow.set_registry_uri()
+        tracking_url_type_store = None 
+        
 
-
+        #  set up data drifts experiments 
 
     def validateFeatureColumns(self, data: pd.DataFrame):
         """
         Validates Columns against Baseline Columns 
         
         """
+        logging.info("Validation features and column names")
         columnsConfig = self.dataValidationConfig["Columns"]
         expected_columns = list(columnsConfig.keys())
         actual_columns = data.columns
@@ -88,6 +91,7 @@ class DataValidation:
         else:
             logging.info("Column count matches expected configuration")
 
+        logging.info("Feature and Columns Validated Succesfully")
         return number_features_match
 
     def InitiateDataValidaton(self):
@@ -103,9 +107,9 @@ class DataValidation:
             #print(DataDriftReport)
 
             columnValidationStatus = self.validateFeatureColumns(trainData)
-            print(columnValidationStatus)
-            for column in DataDriftReport:
-                print(column)
+            logging.info("Columns and feature Validation Status: {columnValidationStatus}")
+
+
 
         except Exception as e: 
             logging.error("Error Occurred during Data Validation")
