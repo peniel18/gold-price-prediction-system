@@ -74,7 +74,7 @@ class DataValidation:
         logging.info(f"Expected Columns: {expected_columns}")
         logging.info(f"Actual Columns: {actual_columns}")
 
-        number_features = len(expected_columns) == actual_columns  
+        number_features_match = bool(len(expected_columns) == actual_columns)
         # validate column names 
         missing_columns = [col for col in expected_columns if col not in actual_columns]
     
@@ -83,12 +83,12 @@ class DataValidation:
         else: 
             logging.info("All expected columns are present")
 
-        if not number_features: 
+        if not number_features_match: 
             logging.warning(f"Column count mismatch: Expected {len(expected_columns)} columns but found {len(actual_columns)}")
         else:
             logging.info("Column count matches expected configuration")
 
-        return number_features
+        return number_features_match
 
     def InitiateDataValidaton(self):
         try: 
