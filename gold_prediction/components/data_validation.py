@@ -1,7 +1,7 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException 
 from scipy.stats import ks_2samp
-from omegaconf import OmegaConf
+from omegaconf import OmegaConf, DictConfig
 from typing import List
 import sys 
 import pandas as pd 
@@ -9,13 +9,8 @@ import mlflow
 
 
 
-
-
-# validate columns 
-# calculate data drift 
-# validate the number of features created
 class DataValidation:
-    def __init__(self, dataValidationConfig):
+    def __init__(self, dataValidationConfig: DictConfig):
         self.dataValidationConfig = dataValidationConfig 
 
     def evaluate_data_drift(self,
@@ -49,7 +44,7 @@ class DataValidation:
                 # log drifts of each colum to mlflow 
                 column_drift: dict = {}
                 column_drift["column"] = column
-                column_drift["P-value"] = p_value
+                column_drift["p-value"] = p_value
                 column_drift["KS statistic"] = ks_stat
                 column_drift["drift detected"] = dataDrift
 
@@ -62,9 +57,38 @@ class DataValidation:
             raise CustomException(e, sys)
 
 
-    def validateFeatureColumns(self):
+    def track_data_drift_with_mlflow(drift_results: List[dict]) -> None: 
+        pass 
 
-        return None 
+
+
+    def validateFeatureColumns(self, data: pd.DataFrame):
+        """
+        Validates Columns against Baseline Columns 
+        
+        """
+        columnsConfig = self.dataValidationConfig["Columns"]
+        expected_columns = list(columnsConfig.keys())
+        actual_columns = data.columns
+        
+        logging.info(f"Expected Columns: {expected_columns}")
+        logging.info(f"Actual Columns: {actual_columns}")
+
+        number_features = len(expected_columns) == actual_columns  
+        # validate column names 
+        missing_columns = [col for col in expected_columns if col not in actual_columns]
+    
+        if missing_columns: 
+            logging.info(f"Missing Columns Detected: {', '.join(missing_columns)}")
+        else: 
+            logging.info("All expected columns are present")
+
+        if not number_features: 
+            logging.warning(f"Column count mismatch: Expected {len(expected_columns)} columns but found {len(actual_columns)}")
+        else:
+            logging.info("Column count matches expected configuration")
+
+        return number_features
 
     def InitiateDataValidaton(self):
         try: 
@@ -76,8 +100,10 @@ class DataValidation:
                 base_dataset=trainData, 
                 incoming_dataset=testData, 
             )
-            print(DataDriftReport)
+            #print(DataDriftReport)
 
+            columnValidationStatus = self.validateFeatureColumns(trainData)
+            print(columnValidationStatus)
             for column in DataDriftReport:
                 print(column)
 
