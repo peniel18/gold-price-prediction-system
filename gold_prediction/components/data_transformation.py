@@ -220,7 +220,7 @@ class DataTransformation:
             )
 
 
-        except Exception as e: 
+        except Exception as e:
             logging.error("Error Occurred during data transformation ")
             raise CustomException(e, sys)
 

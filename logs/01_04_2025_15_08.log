@@ -1,0 +1,10 @@
+[2025-01-04 15:08:26,524] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-04 15:08:28,464] 95 root - INFO - Data Validation has started
+[2025-01-04 15:08:28,492] 35 root - INFO - Checking data drift
+[2025-01-04 15:08:28,527] 74 root - INFO - Expected Columns: ['Date', 'month', 'year', 'day', 'day_week_name', 'is_weekend', 'dayOfyear', 'quarter', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max', 'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'lag_1', 'lag_2', 'lag_3']
+[2025-01-04 15:08:28,528] 75 root - INFO - Actual Columns: Index(['Date', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max',
+       'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'month', 'year', 'day',
+       'dayOfweek', 'is_weekend', 'dayOfyear', 'quarter', 'lag_1', 'lag_2',
+       'lag_3'],
+      dtype='object')
+[2025-01-04 15:08:28,529] 111 root - ERROR - Error Occurred during Data Validation

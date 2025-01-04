@@ -1,0 +1,11 @@
+[2025-01-04 15:12:29,388] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-04 15:12:31,352] 95 root - INFO - Data Validation has started
+[2025-01-04 15:12:31,379] 35 root - INFO - Checking data drift
+[2025-01-04 15:12:31,414] 74 root - INFO - Expected Columns: ['Date', 'month', 'year', 'day', 'day_week_name', 'is_weekend', 'dayOfyear', 'quarter', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max', 'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'lag_1', 'lag_2', 'lag_3']
+[2025-01-04 15:12:31,415] 75 root - INFO - Actual Columns: Index(['Date', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max',
+       'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'month', 'year', 'day',
+       'dayOfweek', 'is_weekend', 'dayOfyear', 'quarter', 'lag_1', 'lag_2',
+       'lag_3'],
+      dtype='object')
+[2025-01-04 15:12:31,416] 82 root - INFO - Missing Columns Detected: day_week_name
+[2025-01-04 15:12:31,416] 89 root - INFO - Column count matches expected configuration

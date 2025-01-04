@@ -1,0 +1,6 @@
+[2025-01-04 14:38:35,145] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-04 14:38:37,170] 85 root - INFO - Data Validation has started
+[2025-01-04 14:38:37,200] 35 root - INFO - Checking data drift
+[2025-01-04 14:38:47,698] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-04 14:38:49,712] 85 root - INFO - Data Validation has started
+[2025-01-04 14:38:49,737] 35 root - INFO - Checking data drift

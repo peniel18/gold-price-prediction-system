@@ -74,7 +74,7 @@ class DataValidation:
         logging.info(f"Expected Columns: {expected_columns}")
         logging.info(f"Actual Columns: {actual_columns}")
 
-        number_features_match = bool(len(expected_columns) == actual_columns)
+        number_features_match = bool(len(expected_columns) == len(actual_columns))
         # validate column names 
         missing_columns = [col for col in expected_columns if col not in actual_columns]
     
