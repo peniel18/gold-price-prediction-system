@@ -60,10 +60,38 @@ class DataValidation:
 
 
     def track_data_drift_with_mlflow(drift_results: List[dict], MLFLOW_URI: str) -> None: 
+        """
+        Pushes data drifts reports to dagshub for experiment tracking 
+        
+        Params: 
+            drift_results: Data drifts of each feature column 
+
+            MLFLOW_URI: mlflow tracking uri from dagshub
+
+        Returns: 
+            None
+
+        """
+        
         dagshub.init(repo_owner='peniel18', repo_name='network-security', mlflow=True)
         mlflow.set_registry_uri(MLFLOW_URI)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-        
+        mlflow.set_experiment("Data Drift Report")
+
+        for dataDrifts in drift_results:
+            column = dataDrifts["column"]
+            p_value = dataDrifts["p-value"]
+            ks_statistic = dataDrifts["KS statistic"]
+            detected = dataDrifts["drift detected"]
+
+            with mlflow.set_run() as run:
+                # log data drifts params 
+                mlflow.log_metric(column)
+                mlflow.log_metric(p_value)
+                mlflow.log_metric(ks_statistic)
+                mlflow.log_metric(detected)
+
+             
 
         #  set up data drifts experiments 
 
@@ -107,10 +135,14 @@ class DataValidation:
                 base_dataset=trainData, 
                 incoming_dataset=testData, 
             )
-            #print(DataDriftReport)
 
             columnValidationStatus = self.validateFeatureColumns(trainData)
-            logging.info("Columns and feature Validation Status: {columnValidationStatus}")
+            logging.info(f"Columns and feature Validation Status: {columnValidationStatus}")
+
+            for dataDrift in DataDriftReport: 
+                print(dataDrift["column"])
+                print(dataDrift["p-value"])
+                #print(dataDrift)
 
 
 

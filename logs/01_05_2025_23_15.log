@@ -1,0 +1,28 @@
+[2025-01-05 23:15:39,527] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-05 23:15:41,132] 126 root - INFO - Data Validation has started
+[2025-01-05 23:15:41,153] 37 root - INFO - Checking data drift
+[2025-01-05 23:15:41,193] 99 root - INFO - Validation features and column names
+[2025-01-05 23:15:41,193] 104 root - INFO - Expected Columns: ['Date', 'month', 'year', 'day', 'day_week_name', 'is_weekend', 'dayOfyear', 'quarter', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max', 'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'lag_1', 'lag_2', 'lag_3']
+[2025-01-05 23:15:41,194] 105 root - INFO - Actual Columns: Index(['Date', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max',
+       'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'month', 'year', 'day',
+       'dayOfweek', 'is_weekend', 'dayOfyear', 'quarter', 'lag_1', 'lag_2',
+       'lag_3'],
+      dtype='object')
+[2025-01-05 23:15:41,195] 112 root - INFO - Missing Columns Detected: day_week_name
+[2025-01-05 23:15:41,195] 119 root - INFO - Column count matches expected configuration
+[2025-01-05 23:15:41,195] 121 root - INFO - Feature and Columns Validated Succesfully
+[2025-01-05 23:15:41,196] 136 root - INFO - Columns and feature Validation Status: True
+[2025-01-05 23:15:54,078] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-05 23:15:55,760] 126 root - INFO - Data Validation has started
+[2025-01-05 23:15:55,782] 37 root - INFO - Checking data drift
+[2025-01-05 23:15:55,813] 99 root - INFO - Validation features and column names
+[2025-01-05 23:15:55,814] 104 root - INFO - Expected Columns: ['Date', 'month', 'year', 'day', 'day_week_name', 'is_weekend', 'dayOfyear', 'quarter', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max', 'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'lag_1', 'lag_2', 'lag_3']
+[2025-01-05 23:15:55,815] 105 root - INFO - Actual Columns: Index(['Date', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max',
+       'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'month', 'year', 'day',
+       'dayOfweek', 'is_weekend', 'dayOfyear', 'quarter', 'lag_1', 'lag_2',
+       'lag_3'],
+      dtype='object')
+[2025-01-05 23:15:55,815] 112 root - INFO - Missing Columns Detected: day_week_name
+[2025-01-05 23:15:55,815] 119 root - INFO - Column count matches expected configuration
+[2025-01-05 23:15:55,816] 121 root - INFO - Feature and Columns Validated Succesfully
+[2025-01-05 23:15:55,816] 136 root - INFO - Columns and feature Validation Status: True
