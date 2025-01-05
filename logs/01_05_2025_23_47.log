@@ -1,0 +1,20 @@
+[2025-01-05 23:47:25,893] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-05 23:47:27,747] 128 root - INFO - Data Validation has started
+[2025-01-05 23:47:27,769] 37 root - INFO - Checking data drift
+[2025-01-05 23:47:28,869] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2025-01-05 23:47:28,894] 107 dagshub - INFO - Accessing as peniel18
+[2025-01-05 23:47:29,746] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/peniel18/gold-price-prediction-system "HTTP/1.1 200 OK"
+[2025-01-05 23:47:30,526] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2025-01-05 23:47:30,530] 107 dagshub - INFO - Initialized MLflow to track repo "peniel18/gold-price-prediction-system"
+[2025-01-05 23:47:30,531] 107 dagshub - INFO - Repository peniel18/gold-price-prediction-system initialized!
+[2025-01-05 23:49:54,866] 101 root - INFO - Validation features and column names
+[2025-01-05 23:49:54,867] 106 root - INFO - Expected Columns: ['Date', 'month', 'year', 'day', 'day_week_name', 'is_weekend', 'dayOfyear', 'quarter', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max', 'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'lag_1', 'lag_2', 'lag_3']
+[2025-01-05 23:49:54,868] 107 root - INFO - Actual Columns: Index(['Date', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max',
+       'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'month', 'year', 'day',
+       'dayOfweek', 'is_weekend', 'dayOfyear', 'quarter', 'lag_1', 'lag_2',
+       'lag_3'],
+      dtype='object')
+[2025-01-05 23:49:54,869] 114 root - INFO - Missing Columns Detected: day_week_name
+[2025-01-05 23:49:54,869] 121 root - INFO - Column count matches expected configuration
+[2025-01-05 23:49:54,870] 123 root - INFO - Feature and Columns Validated Succesfully
+[2025-01-05 23:49:54,870] 144 root - INFO - Columns and feature Validation Status: True

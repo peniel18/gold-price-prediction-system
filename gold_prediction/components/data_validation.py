@@ -88,7 +88,7 @@ class DataValidation:
                 # log data drifts params 
                 mlflow.log_metric(f"{column}_p_value", p_value)
                 mlflow.log_metric(f"{column}_ks_statistic", ks_statistic)
-                mlflow.log_metric(f"{column}_drift_detected", str(detected))
+                mlflow.log_metric(f"{column}_drift_detected", int(detected))
                 mlflow.log_param("feature_column", column)
              
  
@@ -136,7 +136,7 @@ class DataValidation:
             # log drifts results 
             MLFLOW_URI = "https://dagshub.com/peniel18/gold-price-prediction-system.mlflow"
             self.track_data_drift_with_mlflow(
-                data_results=DataDriftReport,
+                drift_results=DataDriftReport,
                 MLFLOW_URI=MLFLOW_URI
             )
 
