@@ -3,6 +3,8 @@ from gold_prediction.exception.exception import CustomException
 from scipy.stats import ks_2samp
 from omegaconf import OmegaConf, DictConfig
 from typing import List
+from urllib.parse import urlparse 
+import dagshub
 import sys 
 import pandas as pd 
 import mlflow 
@@ -57,9 +59,10 @@ class DataValidation:
             raise CustomException(e, sys)
 
 
-    def track_data_drift_with_mlflow(drift_results: List[dict]) -> None: 
-        mlflow.set_registry_uri()
-        tracking_url_type_store = None 
+    def track_data_drift_with_mlflow(drift_results: List[dict], MLFLOW_URI: str) -> None: 
+        dagshub.init(repo_owner='peniel18', repo_name='network-security', mlflow=True)
+        mlflow.set_registry_uri(MLFLOW_URI)
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         
 
         #  set up data drifts experiments 
