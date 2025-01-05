@@ -59,7 +59,7 @@ class DataValidation:
             raise CustomException(e, sys)
 
 
-    def track_data_drift_with_mlflow(drift_results: List[dict], MLFLOW_URI: str) -> None: 
+    def track_data_drift_with_mlflow(self, drift_results: List[dict], MLFLOW_URI: str) -> None: 
         """
         Pushes data drifts reports to dagshub for experiment tracking 
         
@@ -73,7 +73,7 @@ class DataValidation:
 
         """
         
-        dagshub.init(repo_owner='peniel18', repo_name='network-security', mlflow=True)
+        dagshub.init(repo_owner='peniel18', repo_name='gold-price-prediction-system', mlflow=True)
         mlflow.set_registry_uri(MLFLOW_URI)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         mlflow.set_experiment("Data Drift Report")
@@ -84,16 +84,14 @@ class DataValidation:
             ks_statistic = dataDrifts["KS statistic"]
             detected = dataDrifts["drift detected"]
 
-            with mlflow.set_run() as run:
+            with mlflow.start_run():
                 # log data drifts params 
-                mlflow.log_metric(column)
-                mlflow.log_metric(p_value)
-                mlflow.log_metric(ks_statistic)
-                mlflow.log_metric(detected)
-
+                mlflow.log_metric(f"{column}_p_value", p_value)
+                mlflow.log_metric(f"{column}_ks_statistic", ks_statistic)
+                mlflow.log_metric(f"{column}_drift_detected", str(detected))
+                mlflow.log_param("feature_column", column)
              
-
-        #  set up data drifts experiments 
+ 
 
     def validateFeatureColumns(self, data: pd.DataFrame):
         """
@@ -135,15 +133,16 @@ class DataValidation:
                 base_dataset=trainData, 
                 incoming_dataset=testData, 
             )
+            # log drifts results 
+            MLFLOW_URI = "https://dagshub.com/peniel18/gold-price-prediction-system.mlflow"
+            self.track_data_drift_with_mlflow(
+                data_results=DataDriftReport,
+                MLFLOW_URI=MLFLOW_URI
+            )
 
             columnValidationStatus = self.validateFeatureColumns(trainData)
             logging.info(f"Columns and feature Validation Status: {columnValidationStatus}")
-
-            for dataDrift in DataDriftReport: 
-                print(dataDrift["column"])
-                print(dataDrift["p-value"])
-                #print(dataDrift)
-
+            
 
 
         except Exception as e: 
