@@ -1,4 +1,0 @@
-[2025-01-05 23:41:43,906] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
-[2025-01-05 23:41:46,177] 128 root - INFO - Data Validation has started
-[2025-01-05 23:41:46,201] 37 root - INFO - Checking data drift
-[2025-01-05 23:41:46,237] 149 root - ERROR - Error Occurred during Data Validation

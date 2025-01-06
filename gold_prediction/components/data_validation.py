@@ -72,24 +72,30 @@ class DataValidation:
             None
 
         """
+        try:
+            logging.info("Pushing data drifts to dagshub")
         
-        dagshub.init(repo_owner='peniel18', repo_name='gold-price-prediction-system', mlflow=True)
-        mlflow.set_registry_uri(MLFLOW_URI)
-        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-        mlflow.set_experiment("Data Drift Report")
+            dagshub.init(repo_owner='peniel18', repo_name='gold-price-prediction-system', mlflow=True)
+            mlflow.set_registry_uri(MLFLOW_URI)
+            tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+            mlflow.set_experiment("Data Drift Report")
 
-        for dataDrifts in drift_results:
-            column = dataDrifts["column"]
-            p_value = dataDrifts["p-value"]
-            ks_statistic = dataDrifts["KS statistic"]
-            detected = dataDrifts["drift detected"]
+            for dataDrifts in drift_results:
+                column = dataDrifts["column"]
+                p_value = dataDrifts["p-value"]
+                ks_statistic = dataDrifts["KS statistic"]
+                detected = dataDrifts["drift detected"]
 
-            with mlflow.start_run():
-                # log data drifts params 
-                mlflow.log_metric(f"{column}_p_value", p_value)
-                mlflow.log_metric(f"{column}_ks_statistic", ks_statistic)
-                mlflow.log_metric(f"{column}_drift_detected", int(detected))
-                mlflow.log_param("feature_column", column)
+                with mlflow.start_run():
+                    # log data drifts params 
+                    mlflow.log_metric(f"{column}_p_value", p_value)
+                    mlflow.log_metric(f"{column}_ks_statistic", ks_statistic)
+                    mlflow.log_metric(f"{column}_drift_detected", int(detected))
+                    mlflow.log_param("feature_column", column)
+        except Exception as e: 
+            logging.error("Error Occurred during pushing data drifts")
+            raise CustomException(e, sys)
+            
              
  
 
