@@ -86,7 +86,7 @@ class DataValidation:
                 ks_statistic = dataDrifts["KS statistic"]
                 detected = dataDrifts["drift detected"]
 
-                with mlflow.start_run():
+                with mlflow.start_run(run_name=column):
                     # log data drifts params 
                     mlflow.log_metric(f"{column}_p_value", p_value)
                     mlflow.log_metric(f"{column}_ks_statistic", ks_statistic)

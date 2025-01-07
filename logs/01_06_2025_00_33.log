@@ -1,0 +1,21 @@
+[2025-01-06 00:33:30,356] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-01-06 00:33:32,113] 134 root - INFO - Data Validation has started
+[2025-01-06 00:33:32,136] 37 root - INFO - Checking data drift
+[2025-01-06 00:33:32,171] 76 root - INFO - Pushing data drifts to dagshub
+[2025-01-06 00:33:33,353] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2025-01-06 00:33:33,359] 107 dagshub - INFO - Accessing as peniel18
+[2025-01-06 00:33:34,254] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/peniel18/gold-price-prediction-system "HTTP/1.1 200 OK"
+[2025-01-06 00:33:35,905] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2025-01-06 00:33:35,907] 107 dagshub - INFO - Initialized MLflow to track repo "peniel18/gold-price-prediction-system"
+[2025-01-06 00:33:35,908] 107 dagshub - INFO - Repository peniel18/gold-price-prediction-system initialized!
+[2025-01-06 00:36:14,705] 107 root - INFO - Validation features and column names
+[2025-01-06 00:36:14,706] 112 root - INFO - Expected Columns: ['Date', 'month', 'year', 'day', 'day_week_name', 'is_weekend', 'dayOfyear', 'quarter', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max', 'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'lag_1', 'lag_2', 'lag_3']
+[2025-01-06 00:36:14,707] 113 root - INFO - Actual Columns: Index(['Date', 'Close', 'High', 'Low', 'Open', 'Volume', 'Agg_mean', 'Agg_max',
+       'Agg_std', 'Agg_min', 'Kurt', 'skewness', 'month', 'year', 'day',
+       'dayOfweek', 'is_weekend', 'dayOfyear', 'quarter', 'lag_1', 'lag_2',
+       'lag_3'],
+      dtype='object')
+[2025-01-06 00:36:14,708] 120 root - INFO - Missing Columns Detected: day_week_name
+[2025-01-06 00:36:14,708] 127 root - INFO - Column count matches expected configuration
+[2025-01-06 00:36:14,709] 129 root - INFO - Feature and Columns Validated Succesfully
+[2025-01-06 00:36:14,709] 150 root - INFO - Columns and feature Validation Status: True
