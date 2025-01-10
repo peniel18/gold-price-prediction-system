@@ -1,6 +1,8 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException
 from dotenv import load_dotenv
+import pandas as pd 
+import numpy as np 
 import hopsworks 
 import os
 
