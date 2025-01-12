@@ -23,8 +23,23 @@ class ModelTrainer:
         )
         self.tune_hyperparameters = tune_hyperparameters
 
-    def get_training_data(self):
-        return None 
+    def get_training_data(self, feature_store, name: str) -> None:
+
+        try: 
+            logging.info("Getting Data from Hopsoworks")
+            train_feature_view = feature_store.get_feature_view(
+                name=None, 
+                labels=["Close"], 
+            )
+        except: 
+            train_feature_view = feature_store.create_feature_view(
+                name=name, 
+                labels=["Close"]
+            )
+
+    def get_validation_data(self, feature_store, description):
+        #test_feature_view = feature_store
+        pass 
 
     def save_model_locally(self):
         pass 

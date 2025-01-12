@@ -5,4 +5,5 @@ pyaml
 hopsworks[python] 
 python-dotenv
 mlflow
+dagshub
 
