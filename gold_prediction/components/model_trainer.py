@@ -25,7 +25,7 @@ class ModelTrainer:
         )
         self.tune_hyperparameters = tune_hyperparameters
 
-    def get_training_data(self, feature_store, name: str) -> None:
+    def get_training_data(self, feature_store, name: str):
         """
          Retrieve training data from feature store and split into train/validation sets.
     
@@ -39,27 +39,29 @@ class ModelTrainer:
         
         """
         try: 
+            # get a feature view that already exist
             feature_group = feature_store.get_feature_group(name=name)
             columns_to_query = feature_group.select_all()
-            print(columns_to_query)
             logging.info("Getting Data from Hopsoworks")
             train_feature_view = feature_store.get_feature_view(
                 name=None, 
-                labels=["close"], 
+                #labels=["close"], 
                 query = columns_to_query
             )
-            X_train, y_train, X_valid, y_valid = train_feature_view.train_test_spilt(test_size=0.2)
-            print(X_train)
-
+            
         except: 
-            feature_group = feature_store.get_feature_group(name=name)
-            columns_to_query = feature_group.select_all()
+            # create a new feature view if it doesnt exist
+            feature_group = feature_store.create_feature_group(name=name)
+            columns_to_query =  feature_group.select_except(features=["close"])
             train_feature_view = feature_store.create_feature_view(
                 name=name, 
                 labels=["close"], 
+                version=4, 
                 query=columns_to_query
             )
 
+        X_train, X_valid, y_train, y_valid = feature_store.train_test_split(test_size=0.2)
+        return X_train, X_valid, y_train, y_valid
 
     def get_validation_data(self, feature_store, description):
         #test_feature_view = feature_store
@@ -80,10 +82,11 @@ class ModelTrainer:
 
     def InitiateModelTrainer(self):
         feature_store = self.Hopswork_project.get_feature_store()
-        self.get_training_data(
+        features, label = self.get_training_data(
             feature_store=feature_store, 
             name = "gold_price_prediction_train_data",
         )
+        print(features, label)
 
 
 
