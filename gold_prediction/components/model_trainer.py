@@ -31,11 +31,14 @@ class ModelTrainer:
                 name=None, 
                 labels=["Close"], 
             )
+            X_train, y_train, _, _ = feature_store.train_test_spilt(test_size=0.2)
         except: 
             train_feature_view = feature_store.create_feature_view(
                 name=name, 
                 labels=["Close"]
             )
+
+
 
     def get_validation_data(self, feature_store, description):
         #test_feature_view = feature_store
