@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import pandas as pd 
 import numpy as np 
 import hopsworks 
+from dataclasses import dataclass
 import os
 
 
@@ -26,18 +27,23 @@ class ModelTrainer:
     def get_training_data(self, feature_store, name: str) -> None:
 
         try: 
+            columns_to_query = feature_store.select_all()
+            print(columns_to_query)
             logging.info("Getting Data from Hopsoworks")
             train_feature_view = feature_store.get_feature_view(
                 name=None, 
                 labels=["Close"], 
+                query = columns_to_query
             )
-            X_train, y_train, _, _ = feature_store.train_test_spilt(test_size=0.2)
+            X_train, y_train, X_valid, y_vali = feature_store.train_test_spilt(test_size=0.2)
         except: 
+            columns_to_query = feature_store.select_all()
             train_feature_view = feature_store.create_feature_view(
                 name=name, 
-                labels=["Close"]
+                labels=["Close"], 
+                query=columns_to_query
             )
-
+        print(X_train)
 
 
     def get_validation_data(self, feature_store, description):
@@ -58,4 +64,19 @@ class ModelTrainer:
 
 
     def InitiateModelTrainer(self):
-        pass 
+        feature_store = self.Hopswork_project.get_feature_store()
+        self.get_training_data(
+            feature_store=feature_store, 
+            name = "gold_price_prediction_train_data",
+        )
+
+
+
+@dataclass 
+class config: 
+    pass 
+
+if __name__ == "__main__":
+    params = None 
+    modelTrainer = ModelTrainer(ModelTrainerConfig=config, tune_hyperparameters=params)
+    modelTrainer.InitiateModelTrainer()
