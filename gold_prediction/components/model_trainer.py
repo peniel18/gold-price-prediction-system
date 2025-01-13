@@ -1,6 +1,7 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException
 from dotenv import load_dotenv
+from typing import Tuple
 import pandas as pd 
 import numpy as np 
 import hopsworks 
@@ -25,25 +26,39 @@ class ModelTrainer:
         self.tune_hyperparameters = tune_hyperparameters
 
     def get_training_data(self, feature_store, name: str) -> None:
-
+        """
+         Retrieve training data from feature store and split into train/validation sets.
+    
+        Args:
+        feature_store: The feature store instance
+            name: Name of the feature group
+        
+        Returns:
+            tuple: (X_train, y_train, X_valid, y_valid) arrays
+        
+        
+        """
         try: 
-            columns_to_query = feature_store.select_all()
+            feature_group = feature_store.get_feature_group(name=name)
+            columns_to_query = feature_group.select_all()
             print(columns_to_query)
             logging.info("Getting Data from Hopsoworks")
             train_feature_view = feature_store.get_feature_view(
                 name=None, 
-                labels=["Close"], 
+                labels=["close"], 
                 query = columns_to_query
             )
-            X_train, y_train, X_valid, y_vali = feature_store.train_test_spilt(test_size=0.2)
+            X_train, y_train, X_valid, y_valid = train_feature_view.train_test_spilt(test_size=0.2)
+            print(X_train)
+
         except: 
-            columns_to_query = feature_store.select_all()
+            feature_group = feature_store.get_feature_group(name=name)
+            columns_to_query = feature_group.select_all()
             train_feature_view = feature_store.create_feature_view(
                 name=name, 
-                labels=["Close"], 
+                labels=["close"], 
                 query=columns_to_query
             )
-        print(X_train)
 
 
     def get_validation_data(self, feature_store, description):
