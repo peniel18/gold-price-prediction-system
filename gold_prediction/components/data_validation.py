@@ -146,7 +146,7 @@ class DataValidation:
                 MLFLOW_URI=MLFLOW_URI
             )
 
-            columnValidationStatus = self.validateFeatureColumns(trainData)
+            columnValidationStatus = self.validateFeatureColumns(testData)
             logging.info(f"Columns and feature Validation Status: {columnValidationStatus}")
             
 
