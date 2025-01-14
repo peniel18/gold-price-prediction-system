@@ -40,9 +40,9 @@ class ModelTrainer:
         """
         try: 
             # get a feature view that already exist
+            logging.info("Creating a feature view on hopsworks")
             feature_group = feature_store.get_feature_group(name=name)
             columns_to_query = feature_group.select_all()
-            logging.info("Getting Data from Hopsoworks")
             train_feature_view = feature_store.get_feature_view(
                 name=None, 
                 #labels=["close"], 
