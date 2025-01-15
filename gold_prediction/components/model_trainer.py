@@ -44,7 +44,10 @@ class ModelTrainer:
             feature_group = feature_store.get_feature_group(name=name)
             columns_to_query = feature_group.select_all()
             train_feature_view = feature_store.get_feature_view(name=name)
-            
+            features_df, label_df = train_feature_view.training_data(
+                description="gold_price_prediction_train_data"
+            )
+            return features_df,  label_df
         except: 
             # create a new feature view if it doesnt exist
             feature_group = feature_store.create_feature_group(name=name)
@@ -56,8 +59,7 @@ class ModelTrainer:
                 query=columns_to_query
             )
 
-        X_train, X_valid, y_train, y_valid = feature_store.train_test_split(test_size=0.2)
-        return X_train, X_valid, y_train, y_valid
+    
 
     def get_validation_data(self, feature_store, description):
         #test_feature_view = feature_store
