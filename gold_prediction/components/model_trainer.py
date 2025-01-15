@@ -25,7 +25,7 @@ class ModelTrainer:
         )
         self.tune_hyperparameters = tune_hyperparameters
 
-    def get_training_data(self, feature_store, name: str):
+    def get_training_data(self, feature_store, name: str) -> Tuple[pd.DataFrame, pd.Series]:
         """
          Retrieve training data from feature store and split into train/validation sets.
     
@@ -40,25 +40,25 @@ class ModelTrainer:
         """
         try: 
             # get a feature view that already exist
-            logging.info("Creating a feature view on hopsworks")
+            logging.info("Get Feature View on Hopsworks ")
             feature_group = feature_store.get_feature_group(name=name)
-            columns_to_query = feature_group.select_all()
-            train_feature_view = feature_store.get_feature_view(name=name)
-            features_df, label_df = train_feature_view.training_data(
-                description="gold_price_prediction_train_data"
+            feature_view = feature_store.get_feature_view(name=name)
+            features_df, label_df = feature_view.training_data(
+                description=name 
             )
             return features_df,  label_df
         except: 
             # create a new feature view if it doesnt exist
+            logging.info("Create a new Feature View on hopsworks")
             feature_group = feature_store.create_feature_group(name=name)
             columns_to_query =  feature_group.select_except(features=["close"])
-            train_feature_view = feature_store.create_feature_view(
+            feature_view = feature_store.create_feature_view(
                 name=name, 
                 labels=["close"], 
                 version=4, 
                 query=columns_to_query
             )
-            features_df, label_df = train_feature_view.training_data(
+            features_df, label_df = feature_view.training_data(
                 description="gold_price_prediction_train_data"
             )
             return features_df,  label_df
@@ -89,6 +89,7 @@ class ModelTrainer:
             name = "gold_price_prediction_train_data",
         )
         print(features, label)
+        print(type(features))
 
 
 
