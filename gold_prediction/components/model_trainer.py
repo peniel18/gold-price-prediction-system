@@ -58,6 +58,10 @@ class ModelTrainer:
                 version=4, 
                 query=columns_to_query
             )
+            features_df, label_df = train_feature_view.training_data(
+                description="gold_price_prediction_train_data"
+            )
+            return features_df,  label_df
 
     
 
