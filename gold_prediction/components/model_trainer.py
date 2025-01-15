@@ -43,11 +43,7 @@ class ModelTrainer:
             logging.info("Creating a feature view on hopsworks")
             feature_group = feature_store.get_feature_group(name=name)
             columns_to_query = feature_group.select_all()
-            train_feature_view = feature_store.get_feature_view(
-                name=None, 
-                #labels=["close"], 
-                query = columns_to_query
-            )
+            train_feature_view = feature_store.get_feature_view(name=name)
             
         except: 
             # create a new feature view if it doesnt exist
