@@ -51,15 +51,15 @@ class ModelTrainer:
             # create a new feature view if it doesnt exist
             logging.info("Create a new Feature View on hopsworks")
             feature_group = feature_store.create_feature_group(name=name)
-            columns_to_query =  feature_group.select_except(features=["close"])
+            columns_to_query =  feature_group.select_all()
             feature_view = feature_store.create_feature_view(
                 name=name, 
                 labels=["close"], 
-                version=4, 
+               # version=4, 
                 query=columns_to_query
             )
             features_df, label_df = feature_view.training_data(
-                description="gold_price_prediction_train_data"
+                description=name
             )
             return features_df,  label_df
 
