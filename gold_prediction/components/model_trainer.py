@@ -29,13 +29,14 @@ class ModelTrainer:
         )
         self.tune_hyperparameters = tune_hyperparameters
 
-    def get_training_data(self, feature_store, name: str) -> Tuple[pd.DataFrame, pd.Series]:
+    def get_training_data(self, feature_store, name: str, description) -> pd.DataFrame:
         """
          Retrieve training data from feature store and split into train/validation sets.
     
         Args:
         feature_store: The feature store instance
             name: Name of the feature group
+            descripiton: Description of the feature view 
         
         Returns:
             tuple: (X_train, y_train, X_valid, y_valid) arrays
@@ -47,25 +48,27 @@ class ModelTrainer:
             logging.info("Get Feature View on Hopsworks ")
             feature_group = feature_store.get_feature_group(name=name)
             feature_view = feature_store.get_feature_view(name=name)
-            features_df, label_df = feature_view.training_data(
-                description=name 
+            data = feature_view.training_data(
+                description=description, 
+                #version=1
             )
-            return features_df,  label_df
+            return data
         except: 
             # create a new feature view if it doesnt exist
             logging.info("Create a new Feature View on hopsworks")
             feature_group = feature_store.create_feature_group(name=name)
             columns_to_query =  feature_group.select_all()
             feature_view = feature_store.create_feature_view(
-                name=name, 
-                labels=["close"], 
-               # version=4, 
+                name=description, 
+                #labels=["close"], 
+                #version=4, 
                 query=columns_to_query
             )
-            features_df, label_df = feature_view.training_data(
-                description=name
+            data = feature_view.training_data(
+                description=name, 
+                version=16
             )
-            return features_df,  label_df
+            return data
 
     
 
@@ -98,6 +101,11 @@ class ModelTrainer:
             raise KeyError(f"Model {model_name} is not available")
 
 
+
+        def PrepareTrainingData(self, features, labels):
+            pass 
+
+
     
     def train(self, model_name: str, data_name: str, cross_validation: bool = False):
         model_fn = self.get_model(model_name=model_name)
@@ -112,15 +120,16 @@ class ModelTrainer:
 
     def InitiateModelTrainer(self):
         feature_store = self.Hopswork_project.get_feature_store()
-        features, label = self.get_training_data(
+        features = self.get_training_data(
             feature_store=feature_store, 
             name = "gold_price_prediction_train_data",
+            description="train feature view"
         )
-        print(features.sort_index(), label)
-        print(features.columns)
+        print(features)
+        print(features[0].columns)
         print(type(features))
 
-        model_fn = self.get_model(model_name="LinearRegression")
+        model_fn = self.get_model(model_name="lasso")
         print(model_fn)
 
 

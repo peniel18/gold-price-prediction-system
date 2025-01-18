@@ -74,7 +74,7 @@ class DataTransformation:
             df["lag_1"] = df["Close"].shift(1)
             df["lag_2"] = df["Close"].shift(2)
             df["lag_3"] = df["Close"].shift(3)
-            df.dropna(inplace=True)
+            #df.dropna(inplace=True)
              
             
             logging.info("Features Succesfully engineered")
@@ -170,11 +170,11 @@ class DataTransformation:
             # create features 
             trainData = self.generate_features(trainData)
             testData = self.generate_features(testData)
+            print(trainData.sort_index())
 
             print(trainData.columns)
             # hopswork feature store 
             feature_store = self.Hopswork_project.get_feature_store()
-            
             train_feature_group = self.create_or_get_feature_group(
                 feature_store=feature_store, 
                 name = "gold_price_prediction_train_data", 
