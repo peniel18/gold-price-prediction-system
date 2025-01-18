@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.tree import DecisionTreeRegressor
-from typing import Tuple, OPtional
+from typing import Tuple, Optional, Type
 import pandas as pd 
 import numpy as np
 from xgboost import XGBRegressor
@@ -82,10 +82,10 @@ class ModelTrainer:
             model_name: name of the model 
         
         Returns: 
-            Optional
+            A model function 
         """
         models = {
-            "Linear Regression": LinearRegression, 
+            "LinearRegression": LinearRegression, 
             "lasso": Lasso,
             "XGBoost": XGBRegressor, 
             "DescisionTreeRegressor": DecisionTreeRegressor, 
@@ -99,16 +99,15 @@ class ModelTrainer:
 
 
     
-    def train(self):
-        model_fn = self.get_model()
+    def train(self, model_name: str, data_name: str, cross_validation: bool = False):
+        model_fn = self.get_model(model_name=model_name)
         train_features, train_label = self.get_training_data(
-
+            
         )
+        # split 
+
 
         
-
-
-
 
 
     def InitiateModelTrainer(self):
@@ -117,9 +116,12 @@ class ModelTrainer:
             feature_store=feature_store, 
             name = "gold_price_prediction_train_data",
         )
-        print(features, label)
+        print(features.sort_index(), label)
+        print(features.columns)
         print(type(features))
 
+        model_fn = self.get_model(model_name="LinearRegression")
+        print(model_fn)
 
 
 @dataclass 

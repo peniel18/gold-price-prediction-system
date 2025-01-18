@@ -104,6 +104,7 @@ class DataTransformation:
 
             df = df.astype(data_dtypes)
             df["Date"]  = pd.to_datetime(df["Date"])
+            df.set_index("Date")
             logging.info("Data Cleaning is succesfully completed")
             return df 
 
