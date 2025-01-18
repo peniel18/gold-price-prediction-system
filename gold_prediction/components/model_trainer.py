@@ -1,9 +1,13 @@
 from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException
 from dotenv import load_dotenv
-from typing import Tuple
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression, Lasso
+from sklearn.tree import DecisionTreeRegressor
+from typing import Tuple, OPtional
 import pandas as pd 
-import numpy as np 
+import numpy as np
+from xgboost import XGBRegressor
 import hopsworks 
 from dataclasses import dataclass
 import os
@@ -65,18 +69,43 @@ class ModelTrainer:
 
     
 
-    def get_validation_data(self, feature_store, description):
-        #test_feature_view = feature_store
-        pass 
-
+    
     def save_model_locally(self):
         pass 
 
     def register_models_on_hopswork(self):
         pass  
+
+    def get_model(self, model_name: str) -> LinearRegression | Lasso | XGBRegressor | DecisionTreeRegressor | RandomForestRegressor:
+        """
+        Args: 
+            model_name: name of the model 
+        
+        Returns: 
+            Optional
+        """
+        models = {
+            "Linear Regression": LinearRegression, 
+            "lasso": Lasso,
+            "XGBoost": XGBRegressor, 
+            "DescisionTreeRegressor": DecisionTreeRegressor, 
+            "RandomForest" : RandomForestRegressor
+        }
+
+        if model_name.lower() in models.keys():
+            return models[model_name.lower()]
+        else: 
+            raise KeyError(f"Model {model_name} is not available")
+
+
     
     def train(self):
-        pass 
+        model_fn = self.get_model()
+        train_features, train_label = self.get_training_data(
+
+        )
+
+        
 
 
 
