@@ -102,8 +102,8 @@ class ModelTrainer:
 
 
 
-        def PrepareTrainingData(self, features, labels):
-            pass 
+    def PrepareTrainingData(self, features, labels):
+        pass 
 
 
     
@@ -122,7 +122,7 @@ class ModelTrainer:
         feature_store = self.Hopswork_project.get_feature_store()
         features = self.get_training_data(
             feature_store=feature_store, 
-            name = "gold_price_prediction_train_data",
+            name = "gold_prediction_train_data",
             description="train feature view"
         )
         print(features)
