@@ -100,10 +100,9 @@ class ModelTrainer:
 
 
 
-    def PrepareTrainingData(self, features, labels):
-        #  time series splits 
-        # 
-        pass 
+    def PrepareTrainingData(self, data: Tuple) -> pd.DataFrame:
+        df = data[0]
+        return type(df)
  
 
 
@@ -127,8 +126,11 @@ class ModelTrainer:
             description="gold_train_fv"
         )
         print(features)
-        print(features[0].columns)
-        print(type(features))
+        #print(features[0].columns)
+        #print(type(features))
+        data_type = self.PrepareTrainingData(features)
+        print(data_type)
+
 
         model_fn = self.get_model(model_name="lasso")
         print(model_fn)
