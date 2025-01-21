@@ -41,13 +41,12 @@ class ModelTrainer:
         Returns:
             tuple: (X_train, y_train, X_valid, y_valid) arrays
         
-        
         """
         try: 
             # get a feature view that already exist
             logging.info("Get Feature View on Hopsworks ")
             feature_group = feature_store.get_feature_group(name=name)
-            feature_view = feature_store.get_feature_view(name=name)
+            feature_view = feature_store.get_feature_view(name=description)
             data = feature_view.training_data(
                 description=description, 
                 #version=1
@@ -56,7 +55,7 @@ class ModelTrainer:
         except: 
             # create a new feature view if it doesnt exist
             logging.info("Create a new Feature View on hopsworks")
-            feature_group = feature_store.create_feature_group(name=name)
+            feature_group = feature_store.get_feature_group(name=name)
             columns_to_query =  feature_group.select_all()
             feature_view = feature_store.create_feature_view(
                 name=description, 
@@ -65,8 +64,7 @@ class ModelTrainer:
                 query=columns_to_query
             )
             data = feature_view.training_data(
-                description=name, 
-                version=16
+                description=description
             )
             return data
 
@@ -103,7 +101,10 @@ class ModelTrainer:
 
 
     def PrepareTrainingData(self, features, labels):
+        #  time series splits 
+        # 
         pass 
+ 
 
 
     
@@ -123,7 +124,7 @@ class ModelTrainer:
         features = self.get_training_data(
             feature_store=feature_store, 
             name = "gold_prediction_train_data",
-            description="train feature view"
+            description="gold_train_fv"
         )
         print(features)
         print(features[0].columns)
