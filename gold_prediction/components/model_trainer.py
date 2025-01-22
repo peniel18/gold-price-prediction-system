@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.tree import DecisionTreeRegressor
-from typing import Tuple, Optional, Type
+from typing import Tuple, Optional, Type, List
 import pandas as pd 
 import numpy as np
 from xgboost import XGBRegressor
@@ -100,9 +100,13 @@ class ModelTrainer:
 
 
 
-    def PrepareTrainingData(self, data: Tuple) -> pd.DataFrame:
+    def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
         df = data[0]
-        return type(df)
+        # features 
+        features: List[str] = ["close", "month", "year", "day", "dayOfweek", "is_weekend", "dayOfweek", "dayOfyear", "quarter"]
+        ds = df[features]
+
+        return ds 
  
 
 
