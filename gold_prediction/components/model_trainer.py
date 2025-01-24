@@ -113,9 +113,13 @@ class ModelTrainer:
     
     def train(self, model_name: str, data_name: str, cross_validation: bool = False):
         model_fn = self.get_model(model_name=model_name)
-        train_features, train_label = self.get_training_data(
-            
-        )
+        # get data hopsworks
+        ds = self.get_training_data(
+            feature_store=None, 
+            name=None, 
+            description=None
+        )   
+        ds = self.PrepareTrainingData(ds)
         # split 
 
 
