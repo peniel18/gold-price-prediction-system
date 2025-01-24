@@ -103,8 +103,8 @@ class ModelTrainer:
     def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
         df = data[0]
         # features 
-        features: List[str] = ["close", "month", "year", "day", "dayOfweek", "is_weekend", "dayOfweek", "dayOfyear", "quarter"]
-        ds = df[features]
+        columns = ["close", "month", "year", "day", "dayOfweek", "is_weekend", "dayOfweek", "dayOfyear", "quarter"]
+        ds = df[columns]
 
         return ds 
  
