@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.model_selection import TimeSeriesSplit
 from typing import Tuple, Optional, Type, List
 import pandas as pd 
 import numpy as np
@@ -120,7 +121,24 @@ class ModelTrainer:
             description=None
         )   
         ds = self.PrepareTrainingData(ds)
-        # split 
+        features = ds[features]
+        target = ds["close"]
+
+        # time series split 
+        tss = TimeSeriesSplit(n_splits=5, test_size=None, gap=None)
+        ds.sort_index()
+
+        # train 
+        if not self.tune_hyperparameters: 
+            for train_idx, val_idx in tss.split(ds):
+                train_data = ds.iloc[train_idx]
+                test_data = ds.iloc[val_idx]
+        else: 
+            pass 
+
+
+
+
 
 
         
