@@ -133,6 +133,15 @@ class ModelTrainer:
             for train_idx, val_idx in tss.split(ds):
                 train_data = ds.iloc[train_idx]
                 test_data = ds.iloc[val_idx]
+                FEATURES = features.columns
+                TARGET = 'close'
+                X_train = train_data[FEATURES]
+                y_train = train_data[TARGET]
+
+                X_valid = test_data[FEATURES]
+                y_valid = test_data[TARGET]
+
+                model = model_fn()
         else: 
             pass 
 
