@@ -129,7 +129,11 @@ class ModelTrainer:
         ds.sort_index()
 
         # train 
+
         if not self.tune_hyperparameters: 
+            fold = 0 
+            preds = []
+            scores = []
             for train_idx, val_idx in tss.split(ds):
                 train_data = ds.iloc[train_idx]
                 test_data = ds.iloc[val_idx]
