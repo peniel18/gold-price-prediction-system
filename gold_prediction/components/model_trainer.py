@@ -130,25 +130,17 @@ class ModelTrainer:
 
         # train 
 
-        if not self.tune_hyperparameters: 
-            fold = 0 
-            preds = []
-            scores = []
-            for train_idx, val_idx in tss.split(ds):
-                train_data = ds.iloc[train_idx]
-                test_data = ds.iloc[val_idx]
-                FEATURES = features.columns
-                TARGET = 'close'
-                X_train = train_data[FEATURES]
-                y_train = train_data[TARGET]
+        if not self.tune_hyperparameters:
+            logging.info("Training model with default parameters")
+            model = model_fn() 
 
-                X_valid = test_data[FEATURES]
-                y_valid = test_data[TARGET]
-
-                model = model_fn()
+            
         else: 
-            pass 
-
+            logging(f"Tuning parameters of {model_name}")
+            
+            tuned_model_parameters = optimise_hyperparameter(
+                
+            )
 
 
 
