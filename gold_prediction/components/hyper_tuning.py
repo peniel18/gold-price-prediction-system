@@ -25,6 +25,10 @@ def get_parameters(
     """
     Defines a range of parameters for a specific model 
 
+    Args: 
+        model_fn: The model class to get parameters for 
+        trial: Optuna Trial object for parameter suggestion 
+
     Returns: 
         dict: the parameters to be optimised 
     
@@ -63,3 +67,25 @@ def get_parameters(
 
     else: 
         raise ValueError(f"Parameters not defined for model type: {model_fn}")
+    
+
+
+
+def optimise_hyperparameters(
+        model_fn: Optional[Union[
+            LinearRegression, 
+            Lasso, 
+            DecisionTreeRegressor, 
+            RandomForestRegressor, 
+            XGBRegressor
+        ]], 
+
+):
+    pass 
+
+
+
+
+    def objective(trial: optuna.trial.Trial):
+        pass 
+
