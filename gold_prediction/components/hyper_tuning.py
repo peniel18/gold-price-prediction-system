@@ -81,8 +81,14 @@ def optimise_hyperparameters(
         ]], 
 
 ):
-    pass 
+    models_and_tags: dict[object, str] = {
+        LinearRegression: "linearRegression", 
+        XGBRegressor: "xgboost", 
+        DecisionTreeRegressor: "Decision Tree Regressor", 
 
+    }
+    assert model_fn in models_and_tags.keys()
+    model_name = models_and_tags[model_fn]
 
 
 
