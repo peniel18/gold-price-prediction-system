@@ -92,6 +92,11 @@ def optimise_hyperparameters(
 
 
 
-    def objective(trial: optuna.trial.Trial):
-        pass 
+    def objective(trial: optuna.trial.Trial) -> float:
 
+        hyper_params = get_parameters(model_fn=model_fn, trial=trial)        
+    
+    
+        error_metric = None 
+        return error_metric
+    
