@@ -82,9 +82,11 @@ def optimise_hyperparameters(
 
 ):
     models_and_tags: dict[object, str] = {
-        LinearRegression: "linearRegression", 
-        XGBRegressor: "xgboost", 
-        DecisionTreeRegressor: "Decision Tree Regressor", 
+       LinearRegression: "LinearRegression", 
+        Lasso: "lasso",
+        XGBRegressor: "XGBoost", 
+        DecisionTreeRegressor: "DescisionTreeRegressor", 
+        RandomForestRegressor: "RandomForest" 
 
     }
     assert model_fn in models_and_tags.keys()
@@ -93,9 +95,9 @@ def optimise_hyperparameters(
 
 
     def objective(trial: optuna.trial.Trial) -> float:
+            
+        hyper_parameters = get_parameters(model_fn=model_fn, trial=trial)        
 
-        hyper_params = get_parameters(model_fn=model_fn, trial=trial)        
-    
     
         error_metric = None 
         return error_metric
