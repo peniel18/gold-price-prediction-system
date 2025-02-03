@@ -101,14 +101,14 @@ def optimise_hyperparameters(
     def objective(trial: optuna.trial.Trial) -> float:
         
         logging.info(f"Tuning Hyperparameters of model: {model_name}")
-        hyper_parameters = get_parameters(model_fn=model_fn, trial=trial)        
+        hyperparameters = get_parameters(model_fn=model_fn, trial=trial)        
         tss = TimeSeriesSplit(n_split=5)
-        model = model_fn(**hyper_parameters)
+        model = model_fn(**hyperparameters)
         error_scores = []
 
         for train_idx, val_idx in tss.split(X):
             X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
-            y_train, y_val = y.iloc[train_idx], y.ilco[val_idx]
+            y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
 
             model.fit(X_train, y_train) 
             yHat = model.predict(X_val)
@@ -118,8 +118,4 @@ def optimise_hyperparameters(
         avg_score = np.mean(error_scores)
         return avg_score
 
-        
-    
-        error_metric = None 
-        return error_metric
     
