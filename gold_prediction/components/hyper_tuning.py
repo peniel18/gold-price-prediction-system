@@ -1,5 +1,6 @@
 from gold_prediction.logging.logger import logging 
 from gold_prediction.exception.exception import CustomException 
+from gold_prediction.utils.utility_functions import experimentTracker
 import pandas as pd 
 import optuna 
 from sklearn.metrics import mean_squared_error
@@ -81,6 +82,7 @@ def optimise_hyperparameters(
             RandomForestRegressor, 
             XGBRegressor
         ]], 
+        num_of_trials, 
         X: pd.DataFrame, 
         y: pd.Series
 
@@ -117,5 +119,15 @@ def optimise_hyperparameters(
 
         avg_score = np.mean(error_scores)
         return avg_score
+    
+
+
+    study = optuna.create_study(study_name="study", direction="minimize")
+    study.optimize(func=objective, n_trials=num_of_trials)
+    best_hyperparameters = study.best_params
+    best_metric = study.best_value
+
+
+    # log params and experiments to mlflow 
 
     
