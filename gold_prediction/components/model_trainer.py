@@ -1,4 +1,5 @@
 from gold_prediction.logging.logger import logging
+from gold_prediction.components.hyperparameter_tuning import get_parameters, optimise_hyperparameters
 from gold_prediction.exception.exception import CustomException
 from dotenv import load_dotenv
 from sklearn.ensemble import RandomForestRegressor
@@ -69,9 +70,6 @@ class ModelTrainer:
             )
             return data
 
-    
-
-    
     def save_model_locally(self):
         pass 
 
@@ -111,7 +109,6 @@ class ModelTrainer:
  
 
 
-    
     def train(self, model_name: str, data_name: str, cross_validation: bool = False):
         model_fn = self.get_model(model_name=model_name)
         # get data hopsworks

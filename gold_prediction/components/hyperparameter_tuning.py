@@ -10,6 +10,7 @@ from sklearn.ensemble import RandomForestRegressor
 from typing import Optional, Union 
 from sklearn.model_selection import TimeSeriesSplit
 import numpy as np 
+import sys 
 from xgboost import XGBRegressor 
 
 
@@ -101,25 +102,28 @@ def optimise_hyperparameters(
 
 
     def objective(trial: optuna.trial.Trial) -> float:
+        try:
+            logging.info(f"Tuning Hyperparameters of model: {model_name}")
+            hyperparameters = get_parameters(model_fn=model_fn, trial=trial)        
+            tss = TimeSeriesSplit(n_split=5)
+            model = model_fn(**hyperparameters)
+            error_scores = []
+
+            for train_idx, val_idx in tss.split(X):
+                X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
+                y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
+
+                model.fit(X_train, y_train) 
+                yHat = model.predict(X_val)
+                error = mean_squared_error(y_true=y_val, y_pred=yHat)
+                error_scores.append(error)
+
+            avg_score = np.mean(error_scores)
+            return avg_score
+        except Exception as e: 
+            logging.error(f"Error occurred for the objective function")
+            raise CustomException(e, sys)
         
-        logging.info(f"Tuning Hyperparameters of model: {model_name}")
-        hyperparameters = get_parameters(model_fn=model_fn, trial=trial)        
-        tss = TimeSeriesSplit(n_split=5)
-        model = model_fn(**hyperparameters)
-        error_scores = []
-
-        for train_idx, val_idx in tss.split(X):
-            X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
-            y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
-
-            model.fit(X_train, y_train) 
-            yHat = model.predict(X_val)
-            error = mean_squared_error(y_true=y_val, y_pred=yHat)
-            error_scores.append(error)
-
-        avg_score = np.mean(error_scores)
-        return avg_score
-    
 
 
     study = optuna.create_study(study_name="study", direction="minimize")
