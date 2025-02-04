@@ -7,6 +7,7 @@ from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import TimeSeriesSplit
 from typing import Tuple, Optional, Type, List
+from sklearn.metrics import mean_squared_error
 import pandas as pd 
 import numpy as np
 from xgboost import XGBRegressor
@@ -112,32 +113,46 @@ class ModelTrainer:
     def train(self, model_name: str, data_name: str, cross_validation: bool = False):
         model_fn = self.get_model(model_name=model_name)
         # get data hopsworks
+        feature_store = self.Hopswork_project.get_feature_store()
         ds = self.get_training_data(
-            feature_store=None, 
-            name=None, 
-            description=None
+            feature_store=feature_store, 
+            name = "gold_prediction_train_data",
+            description="gold_train_fv"
         )   
         ds = self.PrepareTrainingData(ds)
-        features = ds[features]
-        target = ds["close"]
+        features = ds[features].columns
+        target = "close"
 
         # time series split 
-        tss = TimeSeriesSplit(n_splits=5, test_size=None, gap=None)
+        tss = TimeSeriesSplit(n_splits=5, test_size=0.2, gap=0)
         ds.sort_index()
 
         # train 
 
         if not self.tune_hyperparameters:
+            fold = 0 
+            preds = []
+            scores = []
             logging.info("Training model with default parameters")
-            model = model_fn() 
+            for train_idx, val_idx in tss.split(ds):
+                train = ds.iloc[train_idx]
+                test = ds.iloc[val_idx]
 
-            
+                X_train, y_train = train[features], train[target]
+                X_val, y_val = test[features] , test[target]
+
+                model = model_fn() 
+                model.fit(X_train, y_train)
+                yHat = model.predict(X_val)
+                errors = mean_squared_error(y_val, yHat)
+                scores.append(errors)
+
+            # track preds and scores during training 
+  
         else: 
             logging(f"Tuning parameters of {model_name}")
             
-            tuned_model_parameters = optimise_hyperparameter(
-                
-            )
+            #tuned_model_parameters = optimise_hyperparameter()
 
 
 
@@ -147,21 +162,7 @@ class ModelTrainer:
 
 
     def InitiateModelTrainer(self):
-        feature_store = self.Hopswork_project.get_feature_store()
-        features = self.get_training_data(
-            feature_store=feature_store, 
-            name = "gold_prediction_train_data",
-            description="gold_train_fv"
-        )
-        print(features)
-        #print(features[0].columns)
-        #print(type(features))
-        data_type = self.PrepareTrainingData(features)
-        print(data_type)
-
-
-        model_fn = self.get_model(model_name="lasso")
-        print(model_fn)
+        pass 
 
 
 @dataclass 
