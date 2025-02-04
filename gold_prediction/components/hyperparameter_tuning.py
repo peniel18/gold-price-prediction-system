@@ -1,6 +1,6 @@
 from gold_prediction.logging.logger import logging 
 from gold_prediction.exception.exception import CustomException 
-from gold_prediction.utils.utility_functions import experimentTracker
+from gold_prediction.utils.utility_functions import ParametersTracker
 import pandas as pd 
 import optuna 
 from sklearn.metrics import mean_squared_error
@@ -42,7 +42,7 @@ def get_parameters(
         return {}
     
     elif model_fn == Lasso: 
-        return {}
+        return {} # add alpha 
 
 
     elif model_fn == RandomForestRegressor:
@@ -87,7 +87,7 @@ def optimise_hyperparameters(
         X: pd.DataFrame, 
         y: pd.Series
 
-):
+)-> dict[str, str | int | float ]:
     models_and_tags: dict[callable, str] = {
        LinearRegression: "LinearRegression", 
         Lasso: "lasso",
@@ -133,5 +133,9 @@ def optimise_hyperparameters(
 
 
     # log params and experiments to mlflow 
+
+
+
+    return best_hyperparameters
 
     

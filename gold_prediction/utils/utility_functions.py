@@ -2,6 +2,8 @@ import os
 from omegaconf import OmegaConf
 from pathlib import Path 
 import pandas as pd
+from urllib.parse import urlparse 
+import mlflow
 
 
 
@@ -20,4 +22,9 @@ def read_data(filepath: str) -> pd.DataFrame:
     data = pd.read_csv(filepath)
     return data
 
+
+
+def ParametersTracker(model, params: dict, name: str):
+    mlflow.set_tracking_uri("")
+    tracking_url_type_store = urlparse(mlflow.get_tracking_ur)
 
