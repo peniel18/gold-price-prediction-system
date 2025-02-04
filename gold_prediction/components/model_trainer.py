@@ -103,14 +103,17 @@ class ModelTrainer:
     def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
         df = data[0]
         # features 
-        columns = ["close", "month", "year", "day", "dayOfweek", "is_weekend", "dayOfweek", "dayOfyear", "quarter"]
+        columns = ['close', 'agg_mean', 'agg_max', 'agg_std', 'agg_min', 'kurt',
+                     'skewness', 'month', 'year', 'day', 'dayofweek', 'is_weekend', 'dayofyear', 'quarter']
+        #columns = ["close", "month", "year", "day", "dayOfweek", "is_weekend", "dayOfweek", "dayOfyear", "quarter"]
         ds = df[columns]
+    
 
         return ds 
  
 
 
-    def train(self, model_name: str, data_name: str, cross_validation: bool = False):
+    def train(self, model_name: str):
         model_fn = self.get_model(model_name=model_name)
         # get data hopsworks
         feature_store = self.Hopswork_project.get_feature_store()
@@ -120,11 +123,14 @@ class ModelTrainer:
             description="gold_train_fv"
         )   
         ds = self.PrepareTrainingData(ds)
-        features = ds[features].columns
+        features = list(ds.columns)
+        print(features)
+        features.remove("close")
+    
         target = "close"
 
         # time series split 
-        tss = TimeSeriesSplit(n_splits=5, test_size=0.2, gap=0)
+        tss = TimeSeriesSplit(n_splits=5)
         ds.sort_index()
 
         # train 
@@ -144,6 +150,7 @@ class ModelTrainer:
                 model = model_fn() 
                 model.fit(X_train, y_train)
                 yHat = model.predict(X_val)
+                preds.append(yHat)
                 errors = mean_squared_error(y_val, yHat)
                 scores.append(errors)
 
@@ -162,7 +169,7 @@ class ModelTrainer:
 
 
     def InitiateModelTrainer(self):
-        pass 
+        self.train(model_name="lasso")
 
 
 @dataclass 
