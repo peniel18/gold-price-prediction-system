@@ -155,12 +155,18 @@ class ModelTrainer:
                 scores.append(errors)
 
             # track preds and scores during training 
-  
+            print(np.average(scores))
+            print(preds)
         else: 
             logging(f"Tuning parameters of {model_name}")
             
             #tuned_model_parameters = optimise_hyperparameter()
-
+            model_hyperparameters = optimise_hyperparameters(
+                model_fn=model_fn, 
+                num_of_trials=None, 
+                X=X_train, 
+                y=y_val
+            )
 
 
 
