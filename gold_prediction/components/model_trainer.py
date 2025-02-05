@@ -98,6 +98,8 @@ class ModelTrainer:
         else: 
             raise KeyError(f"Model {model_name} is not available")
 
+    def track_model_parameters_with_mlflow(self):
+        pass 
 
 
     def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
@@ -133,12 +135,11 @@ class ModelTrainer:
         tss = TimeSeriesSplit(n_splits=5)
         ds.sort_index()
 
-        # train 
+        fold = 0 
+        preds = []
+        scores = []
 
         if not self.tune_hyperparameters:
-            fold = 0 
-            preds = []
-            scores = []
             logging.info("Training model with default parameters")
             for train_idx, val_idx in tss.split(ds):
                 train = ds.iloc[train_idx]
@@ -167,6 +168,27 @@ class ModelTrainer:
                 X=X_train, 
                 y=y_val
             )
+
+            logging.info("Training model with tuned hyperparameters")
+            for train_idx, val_idx in tss.split(ds):
+                train = ds.iloc[train_idx]
+                test = ds.iloc[val_idx]
+
+                X_train, y_train = train[features], train[target]
+                X_val, y_val = test[features] , test[target]
+
+                model = model_fn(**model_hyperparameters)
+                model.fit(X_train, y_train)
+                yHat = model.predict(X_val)
+                preds.append(yHat)
+                errors = mean_squared_error(y_val, yHat)
+                scores.append(errors)
+
+            print(np.average(scores))
+            
+
+        
+            
 
 
 
