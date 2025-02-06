@@ -72,11 +72,15 @@ class ModelTrainer:
                 description=description
             )
             return data
+        
 
-    def save_model_locally(self):
-        pass 
+    def save_model_locally(self, model, model_name, path):
+        import joblib 
+        path = os.path.join(path, model_name)
+        joblib.dump(model, path)
 
-    def register_models_on_hopswork(self, model_registry):
+
+    def register_models_on_hopswork(self, model, metrics, model_registry):
         pass  
 
     def get_model(self, model_name: str) -> LinearRegression | Lasso | XGBRegressor | DecisionTreeRegressor | RandomForestRegressor:
@@ -143,7 +147,7 @@ class ModelTrainer:
  
 
 
-    def train(self, model_name: str):
+    def train(self, model_name: str) -> object:
 
         try: 
             model_fn = self.get_model(model_name=model_name)
@@ -188,12 +192,21 @@ class ModelTrainer:
                 # track preds and scores during training 
                 print(np.average(scores))
                 print(preds)
+
+                
+                self.save_model_locally(
+                    model=model, 
+                    model_name=model_name,
+                    path=self.ModelTrainerConfg
+                )
+
                 self.track_model_parameters_with_mlflow(
                     model=None, 
                     parameters=None, 
                     experiment="Training Metrics and Models"
                     loss_metric=None 
                 )
+                return model 
             else: 
                 logging(f"Tuning parameters of {model_name}")
                 
@@ -222,6 +235,12 @@ class ModelTrainer:
 
                 print(np.average(scores))
 
+                self.save_model_locally(
+                    model=model, 
+                    model_name=model_name,
+                    path=self.ModelTrainerConfg
+                )
+
 
                 self.track_model_parameters_with_mlflow(
                     model=None,
@@ -229,6 +248,7 @@ class ModelTrainer:
                     experiment="Training Metrics and model(Tuned Hyperparameter)", 
                     loss_metric=None 
                 )
+                return model 
         except Exception as e: 
             logging.info("Error Occured during training model")
             raise CustomException(e, sys)
@@ -243,7 +263,9 @@ class ModelTrainer:
 
 
     def InitiateModelTrainer(self):
-        self.train(model_name="lasso")
+        model = self.train(model_name="lasso")
+        self.save_model_locally(model=None, path)
+        self.register_models_on_hopswork(model_registry=None)
 
 
 @dataclass 
