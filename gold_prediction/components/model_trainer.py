@@ -15,6 +15,7 @@ import hopsworks
 import dagshub 
 from urllib.parse import urlparse
 import mlflow
+import sys
 from dataclasses import dataclass
 import os
 
@@ -75,7 +76,7 @@ class ModelTrainer:
     def save_model_locally(self):
         pass 
 
-    def register_models_on_hopswork(self):
+    def register_models_on_hopswork(self, model_registry):
         pass  
 
     def get_model(self, model_name: str) -> LinearRegression | Lasso | XGBRegressor | DecisionTreeRegressor | RandomForestRegressor:
@@ -103,18 +104,30 @@ class ModelTrainer:
                                             parameters: dict, 
                                             loss_metric: float,
                                             experiment: str) -> None:
+        """
+        Track training and inference metrics using mlflow and dagshub
+        
+
+        Args: 
+            model: 
+            parameters: 
+            loss_metric: 
+            experiment: Name of the experiement, eg Training Metrics and Model 
+        """
+
+        
         # dagshub init here 7
         dagshub_uri = ""
         dagshub.init()
         mlflow.set_tracking_uri(dagshub_uri)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         mlflow.set_experiment(experiment)
-        with mlflow.run():
+        with mlflow.start_run() as run:
             # log hyperparamters 
             mlflow.log_params(parameters)
             # log training meterics 
             mlflow.log_metric("MSE", loss_metric)
-
+            mlflow.sklearn.log_model(model, "model")
 
 
     def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
@@ -131,76 +144,94 @@ class ModelTrainer:
 
 
     def train(self, model_name: str):
-        model_fn = self.get_model(model_name=model_name)
-        # get data hopsworks
-        feature_store = self.Hopswork_project.get_feature_store()
-        ds = self.get_training_data(
-            feature_store=feature_store, 
-            name = "gold_prediction_train_data",
-            description="gold_train_fv"
-        )   
-        ds = self.PrepareTrainingData(ds)
-        features = list(ds.columns)
-        print(features)
-        features.remove("close")
-    
-        target = "close"
 
-        # time series split 
-        tss = TimeSeriesSplit(n_splits=5)
-        ds.sort_index()
+        try: 
+            model_fn = self.get_model(model_name=model_name)
+            # get data hopsworks
+            feature_store = self.Hopswork_project.get_feature_store()
+            ds = self.get_training_data(
+                feature_store=feature_store, 
+                name = "gold_prediction_train_data",
+                description="gold_train_fv"
+            )   
+            ds = self.PrepareTrainingData(ds)
+            features = list(ds.columns)
+            print(features)
+            features.remove("close")
+        
+            target = "close"
 
-        fold = 0 
-        preds = []
-        scores = []
+            # time series split 
+            tss = TimeSeriesSplit(n_splits=5)
+            ds.sort_index()
 
-        if not self.tune_hyperparameters:
-            logging.info("Training model with default parameters")
-            for train_idx, val_idx in tss.split(ds):
-                train = ds.iloc[train_idx]
-                test = ds.iloc[val_idx]
+            fold = 0 
+            preds = []
+            scores = []
 
-                X_train, y_train = train[features], train[target]
-                X_val, y_val = test[features] , test[target]
+            if not self.tune_hyperparameters:
+                logging.info("Training model with default parameters")
+                for train_idx, val_idx in tss.split(ds):
+                    train = ds.iloc[train_idx]
+                    test = ds.iloc[val_idx]
 
-                model = model_fn() 
-                model.fit(X_train, y_train)
-                yHat = model.predict(X_val)
-                preds.append(yHat)
-                errors = mean_squared_error(y_val, yHat)
-                scores.append(errors)
+                    X_train, y_train = train[features], train[target]
+                    X_val, y_val = test[features] , test[target]
 
-            # track preds and scores during training 
-            print(np.average(scores))
-            print(preds)
-        else: 
-            logging(f"Tuning parameters of {model_name}")
-            
-            #tuned_model_parameters = optimise_hyperparameter()
-            model_hyperparameters = optimise_hyperparameters(
-                model_fn=model_fn, 
-                num_of_trials=None, 
-                X=X_train, 
-                y=y_val
-            )
+                    model = model_fn() 
+                    model.fit(X_train, y_train)
+                    yHat = model.predict(X_val)
+                    preds.append(yHat)
+                    errors = mean_squared_error(y_val, yHat)
+                    scores.append(errors)
 
-            logging.info("Training model with tuned hyperparameters")
-            for train_idx, val_idx in tss.split(ds):
-                train = ds.iloc[train_idx]
-                test = ds.iloc[val_idx]
+                # track preds and scores during training 
+                print(np.average(scores))
+                print(preds)
+                self.track_model_parameters_with_mlflow(
+                    model=None, 
+                    parameters=None, 
+                    experiment="Training Metrics and Models"
+                    loss_metric=None 
+                )
+            else: 
+                logging(f"Tuning parameters of {model_name}")
+                
+                #tuned_model_parameters = optimise_hyperparameter()
+                model_hyperparameters = optimise_hyperparameters(
+                    model_fn=model_fn, 
+                    num_of_trials=None, 
+                    X=X_train, 
+                    y=y_val
+                )
 
-                X_train, y_train = train[features], train[target]
-                X_val, y_val = test[features] , test[target]
+                logging.info("Training model with tuned hyperparameters")
+                for train_idx, val_idx in tss.split(ds):
+                    train = ds.iloc[train_idx]
+                    test = ds.iloc[val_idx]
 
-                model = model_fn(**model_hyperparameters)
-                model.fit(X_train, y_train)
-                yHat = model.predict(X_val)
-                preds.append(yHat)
-                errors = mean_squared_error(y_val, yHat)
-                scores.append(errors)
+                    X_train, y_train = train[features], train[target]
+                    X_val, y_val = test[features] , test[target]
 
-            print(np.average(scores))
-            
+                    model = model_fn(**model_hyperparameters)
+                    model.fit(X_train, y_train)
+                    yHat = model.predict(X_val)
+                    preds.append(yHat)
+                    errors = mean_squared_error(y_val, yHat)
+                    scores.append(errors)
+
+                print(np.average(scores))
+
+
+                self.track_model_parameters_with_mlflow(
+                    model=None,
+                    parameters=None, 
+                    experiment="Training Metrics and model(Tuned Hyperparameter)", 
+                    loss_metric=None 
+                )
+        except Exception as e: 
+            logging.info("Error Occured during training model")
+            raise CustomException(e, sys)
 
         
             
