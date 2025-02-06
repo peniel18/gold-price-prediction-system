@@ -11,7 +11,10 @@ from sklearn.metrics import mean_squared_error
 import pandas as pd 
 import numpy as np
 from xgboost import XGBRegressor
-import hopsworks 
+import hopsworks
+import dagshub 
+from urllib.parse import urlparse
+import mlflow
 from dataclasses import dataclass
 import os
 
@@ -22,15 +25,13 @@ load_dotenv()
 
 
 class ModelTrainer: 
-    def __init__(self, 
-                 ModelTrainerConfig, 
-                 tune_hyperparameters: bool | None = True):
-        self.ModelTrainerConfg = ModelTrainerConfig
-        self.HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
-        self.Hopswork_project = hopsworks.login(
+    def __init__(self, ModelTrainerConfig, tune_hyperparameters: bool | None = True):
+            self.ModelTrainerConfg = ModelTrainerConfig
+            self.HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
+            self.Hopswork_project = hopsworks.login(
             api_key_value = self.HOPSWORKS_API
-        )
-        self.tune_hyperparameters = tune_hyperparameters
+            )
+            self.tune_hyperparameters = tune_hyperparameters
 
     def get_training_data(self, feature_store, name: str, description) -> pd.DataFrame:
         """
@@ -98,8 +99,22 @@ class ModelTrainer:
         else: 
             raise KeyError(f"Model {model_name} is not available")
 
-    def track_model_parameters_with_mlflow(self):
-        pass 
+    def track_model_parameters_with_mlflow(self, model,
+                                            parameters: dict, 
+                                            loss_metric: float,
+                                            experiment: str) -> None:
+        # dagshub init here 7
+        dagshub_uri = ""
+        dagshub.init()
+        mlflow.set_tracking_uri(dagshub_uri)
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        mlflow.set_experiment(experiment)
+        with mlflow.run():
+            # log hyperparamters 
+            mlflow.log_params(parameters)
+            # log training meterics 
+            mlflow.log_metric("MSE", loss_metric)
+
 
 
     def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
@@ -206,5 +221,5 @@ class config:
 
 if __name__ == "__main__":
     params = None 
-    modelTrainer = ModelTrainer(ModelTrainerConfig=config, tune_hyperparameters=params)
+    modelTrainer = ModelTrainer(ModelTrainerConfig=config, tune_hyperparameters=None)
     modelTrainer.InitiateModelTrainer()
