@@ -203,7 +203,7 @@ class ModelTrainer:
                 self.track_model_parameters_with_mlflow(
                     model=None, 
                     parameters=None, 
-                    experiment="Training Metrics and Models"
+                    experiment="Training Metrics and Models",
                     loss_metric=None 
                 )
                 return model 
@@ -264,7 +264,6 @@ class ModelTrainer:
 
     def InitiateModelTrainer(self):
         model = self.train(model_name="lasso")
-        self.save_model_locally(model=None, path)
         self.register_models_on_hopswork(model_registry=None)
 
 
