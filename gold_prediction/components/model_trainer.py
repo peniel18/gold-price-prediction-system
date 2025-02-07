@@ -74,14 +74,22 @@ class ModelTrainer:
             return data
         
 
-    def save_model_locally(self, model, model_name, path):
+    def save_model_locally(self, model, model_name, path) -> str:
         import joblib 
         path = os.path.join(path, model_name)
         joblib.dump(model, path)
+        return path 
 
 
-    def register_models_on_hopswork(self, model, metrics, model_registry):
-        pass  
+    def register_models_on_hopswork(self, model_path: str, metric: dict):
+        try: 
+            model_registry = self.Hopswork_project.get_model_registry()
+            skl_model = model_registry.create_model("skl_model", metrics=metric)
+            skl_model.save(model_path)
+        # create input scheme 
+        except Exception as e: 
+            raise CustomException(e, sys)
+
 
     def get_model(self, model_name: str) -> LinearRegression | Lasso | XGBRegressor | DecisionTreeRegressor | RandomForestRegressor:
         """
@@ -193,11 +201,18 @@ class ModelTrainer:
                 print(np.average(scores))
                 print(preds)
 
+                metric = {"MSE": scores[0]}
+
                 
-                self.save_model_locally(
+                model_save_path = self.save_model_locally(
                     model=model, 
                     model_name=model_name,
-                    path=self.ModelTrainerConfg
+                    path=self.ModelTrainerConfg.model_artifacts.path
+                )
+
+                self.register_models_on_hopswork(
+                    model_path=model_save_path, 
+                    metric=metric
                 )
 
                 self.track_model_parameters_with_mlflow(
@@ -235,10 +250,10 @@ class ModelTrainer:
 
                 print(np.average(scores))
 
-                self.save_model_locally(
+                model_save_path = self.save_model_locally(
                     model=model, 
                     model_name=model_name,
-                    path=self.ModelTrainerConfg
+                    path=self.ModelTrainerConfg.model_artifacts.path
                 )
 
 
@@ -252,15 +267,6 @@ class ModelTrainer:
         except Exception as e: 
             logging.info("Error Occured during training model")
             raise CustomException(e, sys)
-
-        
-            
-
-
-
-
-        
-
 
     def InitiateModelTrainer(self):
         model = self.train(model_name="lasso")
