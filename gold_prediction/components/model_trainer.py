@@ -14,6 +14,7 @@ from xgboost import XGBRegressor
 import hopsworks
 import dagshub 
 from urllib.parse import urlparse
+import joblib
 import mlflow
 import sys
 from dataclasses import dataclass
@@ -74,9 +75,16 @@ class ModelTrainer:
             return data
         
 
-    def save_model_locally(self, model, model_name, path) -> str:
-        import joblib 
-        path = os.path.join(path, model_name)
+    def save_model_locally(self, model, model_name) -> str:
+        """
+        Save the trained model locally as a pickle file 
+
+        Args: 
+            model: the model object to be saved 
+            model_name: the name of the model to be saved
+
+        """ 
+        path = os.path.join(self.ModelTrainerConfg.model_artifacts, model_name)
         joblib.dump(model, path)
         return path 
 
