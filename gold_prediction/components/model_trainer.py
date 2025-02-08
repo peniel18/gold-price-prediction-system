@@ -84,7 +84,7 @@ class ModelTrainer:
             model_name: the name of the model to be saved
 
         """ 
-        path = os.path.join(self.ModelTrainerConfg.model_artifacts, model_name)
+        path = os.path.join(self.ModelTrainerConfg.model_artifacts.path, model_name)
         joblib.dump(model, path)
         return path 
 
@@ -151,6 +151,12 @@ class ModelTrainer:
 
 
     def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
+        """
+        Prepare the training data from hopsworks feature store 
+
+        Args: 
+            data (Tuple): data from the feature store
+        """
         df = data[0]
         # features 
         columns = ['close', 'agg_mean', 'agg_max', 'agg_std', 'agg_min', 'kurt',
@@ -158,13 +164,17 @@ class ModelTrainer:
         #columns = ["close", "month", "year", "day", "dayOfweek", "is_weekend", "dayOfweek", "dayOfyear", "quarter"]
         ds = df[columns]
     
-
         return ds 
  
 
 
     def train(self, model_name: str) -> object:
+        """
+        Train model and register models to hopsworks model registry 
 
+        Args: 
+            model_name: the model of the model to train 
+        """
         try: 
             model_fn = self.get_model(model_name=model_name)
             # get data hopsworks
@@ -260,10 +270,8 @@ class ModelTrainer:
 
                 model_save_path = self.save_model_locally(
                     model=model, 
-                    model_name=model_name,
-                    path=self.ModelTrainerConfg.model_artifacts.path
+                    model_name=model_name
                 )
-
 
                 self.track_model_parameters_with_mlflow(
                     model=None,
