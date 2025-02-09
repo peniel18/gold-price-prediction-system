@@ -45,11 +45,11 @@ class ModelTrainer:
             descripiton: Description of the feature view 
         
         Returns:
-            tuple: (X_train, y_train, X_valid, y_valid) arrays
+            tuple: 
         
         """
         try: 
-            # get a feature view that already exist
+            # get a feature view that already exists
             logging.info("Get Feature View on Hopsworks ")
             feature_group = feature_store.get_feature_group(name=name)
             feature_view = feature_store.get_feature_view(name=description)
@@ -246,7 +246,7 @@ class ModelTrainer:
                 #tuned_model_parameters = optimise_hyperparameter()
                 model_hyperparameters = optimise_hyperparameters(
                     model_fn=model_fn, 
-                    num_of_trials=None, 
+                    num_of_trials=20, 
                     X=X_train, 
                     y=y_val
                 )
