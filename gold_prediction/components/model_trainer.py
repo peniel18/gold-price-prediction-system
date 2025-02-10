@@ -7,6 +7,7 @@ from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import TimeSeriesSplit
 from typing import Tuple, Optional, Type, List
+from omegaconf import OmegaConf
 from sklearn.metrics import mean_squared_error
 import pandas as pd 
 import numpy as np
@@ -28,7 +29,7 @@ load_dotenv()
 
 class ModelTrainer: 
     def __init__(self, ModelTrainerConfig, tune_hyperparameters: bool | None = True):
-            self.ModelTrainerConfg = ModelTrainerConfig
+            self.ModelTrainerConfig = ModelTrainerConfig
             self.HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
             self.Hopswork_project = hopsworks.login(
             api_key_value = self.HOPSWORKS_API
@@ -84,9 +85,15 @@ class ModelTrainer:
             model_name: the name of the model to be saved
 
         """ 
-        path = os.path.join(self.ModelTrainerConfg.model_artifacts.path, model_name)
-        joblib.dump(model, path)
-        return path 
+        try: 
+            os.makedirs(self.ModelTrainerConfig.model_artifacts.path, exist_ok=True)
+            path = os.path.join(self.ModelTrainerConfig.model_artifacts.path, model_name)
+            joblib.dump(model, path)
+
+            return path 
+        except Exception as e: 
+            logging.error(f"Error saving trained model at path:{path}")
+            raise CustomException(e, sys)
 
 
     def register_models_on_hopswork(self, model_path: str, metric: dict):
@@ -100,7 +107,11 @@ class ModelTrainer:
         """
         try: 
             model_registry = self.Hopswork_project.get_model_registry()
-            skl_model = model_registry.create_model("skl_model", metrics=metric)
+            skl_model = model_registry.python.create_model(
+                name = "gold prediction", 
+                metrics = metric, 
+                feature_view = feature_view, 
+            )
             skl_model.save(model_path)
         # create input scheme 
         except Exception as e: 
@@ -229,8 +240,7 @@ class ModelTrainer:
                 
                 model_save_path = self.save_model_locally(
                     model=model, 
-                    model_name=model_name,
-                    path=self.ModelTrainerConfg.model_artifacts.path
+                    model_name=model_name
                 )
 
                 self.register_models_on_hopswork(
@@ -299,6 +309,6 @@ class config:
     pass 
 
 if __name__ == "__main__":
-    params = None 
-    modelTrainer = ModelTrainer(ModelTrainerConfig=config, tune_hyperparameters=None)
+    modelTrainerConfig = OmegaConf.load("configs/model_trainer.yaml")
+    modelTrainer = ModelTrainer(ModelTrainerConfig=modelTrainerConfig, tune_hyperparameters=None)
     modelTrainer.InitiateModelTrainer()
