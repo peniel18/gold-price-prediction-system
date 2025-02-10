@@ -90,6 +90,14 @@ class ModelTrainer:
 
 
     def register_models_on_hopswork(self, model_path: str, metric: dict):
+        """
+        Push model to Hopsworks model registery 
+
+        Args: 
+            model_path: trained model path 
+            metric: Error metric of the trained model 
+        
+        """
         try: 
             model_registry = self.Hopswork_project.get_model_registry()
             skl_model = model_registry.create_model("skl_model", metrics=metric)
@@ -137,10 +145,7 @@ class ModelTrainer:
 
         
         # dagshub init here 7
-        dagshub_uri = ""
-        dagshub.init()
-        mlflow.set_tracking_uri(dagshub_uri)
-        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        dagshub.init(repo_owner='peniel18', repo_name='gold-price-prediction-system', mlflow=True)
         mlflow.set_experiment(experiment)
         with mlflow.start_run() as run:
             # log hyperparamters 
