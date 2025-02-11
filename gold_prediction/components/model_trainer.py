@@ -107,6 +107,13 @@ class ModelTrainer:
         """
         try: 
             model_registry = self.Hopswork_project.get_model_registry()
+            feature_store = self.Hopswork_project.get_feature_store()
+            feature_group = feature_store.get_feature_group(name=name)
+            feature_view = feature_store.get_feature_view(name=description)
+            data = feature_view.training_data(
+                description=description, 
+                #version=1
+            )
             skl_model = model_registry.python.create_model(
                 name = "gold prediction", 
                 metrics = metric, 
