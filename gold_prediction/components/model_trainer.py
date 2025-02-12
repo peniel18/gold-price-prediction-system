@@ -96,24 +96,20 @@ class ModelTrainer:
             raise CustomException(e, sys)
 
 
-    def register_models_on_hopswork(self, model_path: str, metric: dict):
+    def register_models_on_hopswork(self, model_path: str, metric: dict, description: str):
         """
         Push model to Hopsworks model registery 
 
         Args: 
             model_path: trained model path 
             metric: Error metric of the trained model 
+            description: Description of the feature view 
         
         """
         try: 
             model_registry = self.Hopswork_project.get_model_registry()
             feature_store = self.Hopswork_project.get_feature_store()
-            feature_group = feature_store.get_feature_group(name=name)
             feature_view = feature_store.get_feature_view(name=description)
-            data = feature_view.training_data(
-                description=description, 
-                #version=1
-            )
             skl_model = model_registry.python.create_model(
                 name = "gold prediction", 
                 metrics = metric, 
