@@ -140,6 +140,7 @@ class ModelTrainer:
         if model_name.lower() in models.keys():
             return models[model_name.lower()]
         else: 
+            logging.info("Error occurred trying to get model function")
             raise KeyError(f"Model {model_name} is not available")
 
     def track_model_parameters_with_mlflow(self, model,
