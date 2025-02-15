@@ -96,7 +96,7 @@ class ModelTrainer:
             raise CustomException(e, sys)
 
 
-    def register_models_on_hopswork(self, model_path: str, metric: dict, description: str):
+    def register_models_on_hopswork(self, model_path: str, metric: dict):
         """
         Push model to Hopsworks model registery 
 
@@ -108,8 +108,8 @@ class ModelTrainer:
         """
         try: 
             model_registry = self.Hopswork_project.get_model_registry()
-            gold_model = model_registry.python.create(
-                nmae = "gold_model", 
+            gold_model = model_registry.python.create_model(
+                name = "gold_model", 
                 description="Gold Prediction Model"
             )
             gold_model.save(model_path)
