@@ -108,14 +108,11 @@ class ModelTrainer:
         """
         try: 
             model_registry = self.Hopswork_project.get_model_registry()
-            feature_store = self.Hopswork_project.get_feature_store()
-            feature_view = feature_store.get_feature_view(name=description)
-            skl_model = model_registry.python.create_model(
-                name = "gold prediction", 
-                metrics = metric, 
-                feature_view = feature_view, 
+            gold_model = model_registry.python.create(
+                nmae = "gold_model", 
+                description="Gold Prediction Model"
             )
-            skl_model.save(model_path)
+            gold_model.save(model_path)
         # create input scheme 
         except Exception as e: 
             raise CustomException(e, sys)
