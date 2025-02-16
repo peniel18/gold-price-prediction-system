@@ -87,7 +87,7 @@ class ModelTrainer:
         """ 
         try: 
             os.makedirs(self.ModelTrainerConfig.model_artifacts.path, exist_ok=True)
-            path = os.path.join(self.ModelTrainerConfig.model_artifacts.path, model_name)
+            path = os.path.join(self.ModelTrainerConfig.model_artifacts.path, f"{model_name}.pkl")
             joblib.dump(model, path)
 
             return path 
@@ -141,7 +141,7 @@ class ModelTrainer:
             raise KeyError(f"Model {model_name} is not available")
 
     def track_model_parameters_with_mlflow(self, model,
-                                            parameters: dict, 
+                                            parameters: dict | None, 
                                             loss_metric: float,
                                             experiment: str) -> None:
         """
@@ -155,17 +155,20 @@ class ModelTrainer:
             experiment: Name of the experiement, eg Training Metrics and Model 
         """
 
-        
-        # dagshub init here 7
-        dagshub.init(repo_owner='peniel18', repo_name='gold-price-prediction-system', mlflow=True)
-        mlflow.set_experiment(experiment)
-        with mlflow.start_run() as run:
-            # log hyperparamters 
-            mlflow.log_params(parameters)
-            # log training meterics 
-            mlflow.log_metric("MSE", loss_metric)
-            mlflow.sklearn.log_model(model, "model")
+        try: 
+            # dagshub init here 
+            dagshub.init(repo_owner='peniel18', repo_name='gold-price-prediction-system', mlflow=True)
+            mlflow.set_experiment(experiment)
+            with mlflow.start_run() as run:
+                # log hyperparamters 
+                mlflow.log_params(parameters)
+                # log training meterics 
+                mlflow.log_metric("MSE", loss_metric)
+                mlflow.sklearn.log_model(model, "model")
 
+        except Exception as e: 
+            logging.info("Error Occured during tracking parameters with mlflow and dagshub")
+            raise CustomException(e, sys)
 
     def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
         """
@@ -250,10 +253,10 @@ class ModelTrainer:
                 )
 
                 self.track_model_parameters_with_mlflow(
-                    model=None, 
+                    model=model, 
                     parameters=None, 
                     experiment="Training Metrics and Models",
-                    loss_metric=None 
+                    loss_metric=metric
                 )
                 return model 
             else: 
@@ -302,12 +305,7 @@ class ModelTrainer:
 
     def InitiateModelTrainer(self):
         model = self.train(model_name="lasso")
-        self.register_models_on_hopswork(model_registry=None)
 
-
-@dataclass 
-class config: 
-    pass 
 
 if __name__ == "__main__":
     modelTrainerConfig = OmegaConf.load("configs/model_trainer.yaml")
