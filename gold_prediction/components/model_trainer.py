@@ -149,10 +149,13 @@ class ModelTrainer:
         
 
         Args: 
-            model: 
-            parameters: 
-            loss_metric: 
+            model: The rained model object to be logged 
+            parameters: Dictionary of hyperparameters to track, If None, no parameters to be tracked
+            loss_metric: The MSE value to be logged
             experiment: Name of the experiement, eg Training Metrics and Model 
+
+        Raises: 
+            CustomException: If any erorr occurs, throw the custom exception function 
         """
 
         try: 
@@ -160,8 +163,9 @@ class ModelTrainer:
             dagshub.init(repo_owner='peniel18', repo_name='gold-price-prediction-system', mlflow=True)
             mlflow.set_experiment(experiment)
             with mlflow.start_run() as run:
-                # log hyperparamters 
-                mlflow.log_params(parameters)
+                # log hyperparamters if provided
+                if parameters is not None:
+                    mlflow.log_params(parameters) 
                 # log training meterics 
                 mlflow.log_metric("MSE", loss_metric)
                 mlflow.sklearn.log_model(model, "model")
@@ -240,6 +244,7 @@ class ModelTrainer:
                 print(preds)
 
                 metric = {"MSE": scores[0]}
+                mse = float(np.average(scores))
 
                 
                 model_save_path = self.save_model_locally(
@@ -249,7 +254,7 @@ class ModelTrainer:
 
                 self.register_models_on_hopswork(
                     model_path=model_save_path, 
-                    metric=metric
+                    metric=mse
                 )
 
                 self.track_model_parameters_with_mlflow(
