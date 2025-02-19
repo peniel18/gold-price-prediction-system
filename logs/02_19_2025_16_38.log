@@ -1,0 +1,213 @@
+[2025-02-19 16:38:06,787] 161 numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+[2025-02-19 16:38:10,721] 115 great_expectations._docs_decorators - INFO - Skipping registering function get_context because it does not have a class
+[2025-02-19 16:38:11,742] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,743] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,757] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,757] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,840] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,841] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,841] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,842] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,842] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,843] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,843] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,844] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,844] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,845] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,845] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,846] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,846] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,847] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,847] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,848] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,848] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,848] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,852] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,852] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,853] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,853] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,857] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,858] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,859] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,859] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,860] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,861] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,861] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,862] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,862] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,863] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,863] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,864] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,864] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,865] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,865] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,865] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,866] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,866] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,871] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,871] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,872] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,872] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,873] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,873] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,874] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,874] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,875] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,875] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,876] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,876] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,876] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,877] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,877] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,878] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,878] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,878] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,882] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,883] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,883] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,884] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,884] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,885] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,885] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,886] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,886] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,887] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,887] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,888] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,888] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,889] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:11,889] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,890] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,890] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,890] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,906] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,906] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,907] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,907] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,935] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,936] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,936] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,936] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,941] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,942] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,942] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,942] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,951] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,952] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,952] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:11,953] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,078] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,079] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,079] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,080] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,080] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,081] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,082] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,082] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,083] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,083] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,084] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,084] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,085] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,085] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,085] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,086] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,091] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,092] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,093] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,093] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,099] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,100] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,101] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,101] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,102] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,102] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,103] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,104] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,104] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,105] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,105] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,105] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,106] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,106] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,106] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,107] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,114] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,115] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,115] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,116] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,116] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,117] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,117] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,118] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,118] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,119] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,119] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,120] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,120] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,121] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,121] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,121] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,130] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,131] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,132] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,133] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,133] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,134] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,134] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,135] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,135] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,136] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,136] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,137] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._bind_asset_factory_method_if_not_present.<locals>._add_asset_factory because it is a closure
+[2025-02-19 16:38:12,137] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,138] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,138] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,138] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,148] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,148] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,149] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,149] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,158] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,159] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,159] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,160] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,171] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,172] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,172] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_add_or_update_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:12,173] 109 great_expectations._docs_decorators - INFO - Skipping registering function DataSourceManager._register_delete_datasource.<locals>.crud_method_info because it is a closure
+[2025-02-19 16:38:13,140] 52 hopsworks_common.client.external - INFO - Initializing external client
+[2025-02-19 16:38:13,141] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
+[2025-02-19 16:38:15,921] 134 hsfs.engine.python - INFO - Python Engine initialized.
+[2025-02-19 16:38:18,607] 54 root - INFO - Get Feature View on Hopsworks 
+[2025-02-19 16:38:30,052] 268 root - INFO - Tuning parameters of lasso
+[2025-02-19 16:38:30,055] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,124] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,186] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,273] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,326] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,405] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,465] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,523] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,615] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,681] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,759] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,887] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:30,983] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:31,080] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:31,165] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:31,263] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:31,348] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:31,454] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:31,543] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:31,634] 112 root - INFO - Tuning Hyperparameters of model: lasso
+[2025-02-19 16:38:31,719] 281 root - INFO - Training model with tuned hyperparameters
+[2025-02-19 16:38:32,559] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2025-02-19 16:38:32,564] 107 dagshub - INFO - Accessing as peniel18
+[2025-02-19 16:38:32,963] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/peniel18/gold-price-prediction-system "HTTP/1.1 200 OK"
+[2025-02-19 16:38:33,791] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2025-02-19 16:38:33,794] 107 dagshub - INFO - Initialized MLflow to track repo "peniel18/gold-price-prediction-system"
+[2025-02-19 16:38:33,794] 107 dagshub - INFO - Repository peniel18/gold-price-prediction-system initialized!
+[2025-02-19 16:38:37,344] 174 root - INFO - Error Occured during tracking parameters with mlflow and dagshub
+[2025-02-19 16:38:37,345] 311 root - INFO - Error Occured during training model
+[2025-02-19 16:38:37,366] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.

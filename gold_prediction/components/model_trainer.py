@@ -265,16 +265,19 @@ class ModelTrainer:
                 )
                 return model 
             else: 
-                logging(f"Tuning parameters of {model_name}")
+                logging.info(f"Tuning parameters of {model_name}")
                 
                 #tuned_model_parameters = optimise_hyperparameter()
+                X = ds[features]
+                y = ds[target]
                 model_hyperparameters = optimise_hyperparameters(
                     model_fn=model_fn, 
                     num_of_trials=20, 
-                    X=X_train, 
-                    y=y_val
+                    X=X, 
+                    y=y, 
+                    ds=ds # data
                 )
-
+                print(model_hyperparameters)
                 logging.info("Training model with tuned hyperparameters")
                 for train_idx, val_idx in tss.split(ds):
                     train = ds.iloc[train_idx]
@@ -314,5 +317,5 @@ class ModelTrainer:
 
 if __name__ == "__main__":
     modelTrainerConfig = OmegaConf.load("configs/model_trainer.yaml")
-    modelTrainer = ModelTrainer(ModelTrainerConfig=modelTrainerConfig, tune_hyperparameters=None)
+    modelTrainer = ModelTrainer(ModelTrainerConfig=modelTrainerConfig, tune_hyperparameters=True)
     modelTrainer.InitiateModelTrainer()

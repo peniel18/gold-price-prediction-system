@@ -39,7 +39,10 @@ def get_parameters(
     """
 
     if model_fn == LinearRegression: 
-        return {}
+        return {
+            "fit_intercept": trial.suggest_categorical("fit_intercept", [True, False]),
+            "positive": trial.suggest_categorical("positive", [False, True])
+        }
     
     elif model_fn == Lasso: 
         return {
@@ -88,7 +91,8 @@ def optimise_hyperparameters(
         ]], 
         num_of_trials, 
         X: pd.DataFrame, 
-        y: pd.Series
+        y: pd.Series,
+        ds: pd.DataFrame
 
 )-> dict[str, str | int | float ]:
     models_and_tags: dict[callable, str] = {
@@ -103,16 +107,15 @@ def optimise_hyperparameters(
     model_name = models_and_tags[model_fn]
 
 
-
     def objective(trial: optuna.trial.Trial) -> float:
         try:
             logging.info(f"Tuning Hyperparameters of model: {model_name}")
             hyperparameters = get_parameters(model_fn=model_fn, trial=trial)        
-            tss = TimeSeriesSplit(n_split=5)
+            tss = TimeSeriesSplit(n_splits=5)
             model = model_fn(**hyperparameters)
             error_scores = []
 
-            for train_idx, val_idx in tss.split(X):
+            for train_idx, val_idx in tss.split(ds):
                 X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
                 y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
 
@@ -128,16 +131,10 @@ def optimise_hyperparameters(
             raise CustomException(e, sys)
         
 
-
     study = optuna.create_study(study_name="study", direction="minimize")
     study.optimize(func=objective, n_trials=num_of_trials)
     best_hyperparameters = study.best_params
     best_metric = study.best_value
-
-
-    # log params and experiments to mlflow 
-
-
 
     return best_hyperparameters
 
