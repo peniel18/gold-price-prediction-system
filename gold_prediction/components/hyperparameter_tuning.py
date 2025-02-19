@@ -42,7 +42,10 @@ def get_parameters(
         return {}
     
     elif model_fn == Lasso: 
-        return {} # add alpha 
+        return {
+            "alpha": trial.suggest_float("alpha", 0.1, 10), 
+            "max_iter": trial.suggest_int("max_iter", 100, 2000), 
+        } # add alpha 
 
 
     elif model_fn == RandomForestRegressor:

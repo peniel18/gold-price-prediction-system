@@ -261,7 +261,7 @@ class ModelTrainer:
                     model=model, 
                     parameters=None, 
                     experiment="Training Metrics and Models",
-                    loss_metric=metric
+                    loss_metric=mse
                 )
                 return model 
             else: 
