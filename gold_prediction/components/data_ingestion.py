@@ -55,7 +55,7 @@ class DataIngestion:
             raise CustomException(e, sys)
 
 
-    def InitiateDataIngestion(self):
+    def InitializeDataIngestion(self):
         trianData, testData = self.get_data_from_yfinance(
             ticker=self.dataIngestionConfig.DataIngestion.gold_ticker, 
             train_start_date=self.dataIngestionConfig.DataIngestion.train_start_date, 

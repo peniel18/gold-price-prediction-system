@@ -129,7 +129,7 @@ class DataValidation:
         logging.info("Feature and Columns Validated Succesfully")
         return number_features_match
 
-    def InitiateDataValidaton(self):
+    def InitializeDataValidaton(self):
         try: 
             logging.info("Data Validation has started")
             trainData = pd.read_csv(self.dataValidationConfig.train_data.path)
