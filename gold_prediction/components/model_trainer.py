@@ -293,18 +293,17 @@ class ModelTrainer:
                     errors = mean_squared_error(y_val, yHat)
                     scores.append(errors)
 
-                print(np.average(scores))
-
+                metric = np.average(scores)
                 model_save_path = self.save_model_locally(
                     model=model, 
                     model_name=model_name
                 )
 
                 self.track_model_parameters_with_mlflow(
-                    model=None,
+                    model=model,
                     parameters=None, 
                     experiment="Training Metrics and model(Tuned Hyperparameter)", 
-                    loss_metric=None 
+                    loss_metric=metric
                 )
                 return model 
         except Exception as e: 
