@@ -23,23 +23,23 @@ class DataIngestion:
         
         Args: 
 
-
         Returns: 
             A tuple of train and test data sets 
-
 
         Raises
             CustomException error if ticker or dates are invalid 
         
         """
     
-        try: 
+        try:        
             train_data = yf.download(
-                ticker, 
-                start=train_start_date, 
-                end=train_end_date
+                "GC=F", 
+                period="3y"
             ) 
-
+            print(train_data)
+            print(ticker)
+            print(train_start_date)
+            print(test_start_date)
             test_data = yf.download(
                 ticker, 
                 start=test_start_date,
@@ -81,4 +81,4 @@ class DataIngestion:
 if __name__ == "__main__":
     data_ingestion_config = OmegaConf.load("configs/data_ingestion.yaml")
     dataIngestion = DataIngestion(dataIngestionConfig=data_ingestion_config)
-    dataIngestion.InitiateDataIngestion()
+    dataIngestion.InitializeDataIngestion()

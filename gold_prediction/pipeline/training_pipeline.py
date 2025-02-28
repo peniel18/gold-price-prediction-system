@@ -56,8 +56,16 @@ class TrainingPipeline:
             raise CustomException(e, sys)
         
 
-    def InitaiteTrainingPipeline(self):
+    def InitailizeTrainingPipeline(self):
         self.dataIngestion()
         self.dataTransformation()
         self.dataValidation()
         self.modelTrainer()
+        print("Training Successful")
+
+
+
+if __name__ == "__main__":
+    config = None 
+    training_pipeline = TrainingPipeline(TrainingPipelineConfig=config)
+    training_pipeline.InitailizeTrainingPipeline()

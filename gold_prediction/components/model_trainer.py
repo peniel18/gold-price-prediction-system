@@ -14,7 +14,6 @@ import numpy as np
 from xgboost import XGBRegressor
 import hopsworks
 import dagshub 
-from urllib.parse import urlparse
 import joblib
 import mlflow
 import sys
@@ -310,7 +309,7 @@ class ModelTrainer:
             logging.info("Error Occured during training model")
             raise CustomException(e, sys)
 
-    def InitiateModelTrainer(self):
+    def InitializeModelTrainer(self):
         model = self.train(model_name="lasso")
 
 

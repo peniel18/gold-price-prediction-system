@@ -79,8 +79,6 @@ def get_parameters(
         raise ValueError(f"Parameters not defined for model type: {model_fn}")
     
 
-
-
 def optimise_hyperparameters(
         model_fn: Optional[Union[
             LinearRegression, 
