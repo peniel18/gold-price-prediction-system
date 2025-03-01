@@ -2,7 +2,7 @@ from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException 
 from gold_prediction.utils.utility_functions import save_dataframe_object
 import sys
-import pandas as pd 
+import pandas as pd  
 from omegaconf import OmegaConf
 import yfinance as yf 
 
@@ -31,11 +31,15 @@ class DataIngestion:
         
         """
     
-        try:        
+        try: 
             train_data = yf.download(
                 "GC=F", 
-                period="3y"
-            ) 
+                period="3mo"
+            )
+            test_data = yf.download("GC=F", period="1mo")
+            print(f"Test data shape: {test_data.shape}")
+            print(f"Test data available: {not test_data.empty}")
+            print(test_data)
             print(train_data)
             print(ticker)
             print(train_start_date)
@@ -45,7 +49,7 @@ class DataIngestion:
                 start=test_start_date,
                 end=test_end_date
             )
-            # check if any of the data is empty 
+            #check if any of the data is empty 
             if train_data.empty or test_data.empty:
                 raise ValueError("No data found for ticker")
 
