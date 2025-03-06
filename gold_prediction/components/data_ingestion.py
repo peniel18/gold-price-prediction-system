@@ -33,22 +33,18 @@ class DataIngestion:
     
         try: 
             train_data = yf.download(
-                "GC=F", 
-                period="3mo"
+                ticker,
+                start=train_start_date, 
+                end=train_end_date
             )
-            test_data = yf.download("GC=F", period="1mo")
-            print(f"Test data shape: {test_data.shape}")
-            print(f"Test data available: {not test_data.empty}")
-            print(test_data)
             print(train_data)
-            print(ticker)
-            print(train_start_date)
-            print(test_start_date)
+            
             test_data = yf.download(
                 ticker, 
                 start=test_start_date,
                 end=test_end_date
             )
+            print(test_data)
             #check if any of the data is empty 
             if train_data.empty or test_data.empty:
                 raise ValueError("No data found for ticker")
