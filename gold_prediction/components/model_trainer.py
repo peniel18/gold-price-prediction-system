@@ -35,6 +35,7 @@ class ModelTrainer:
             )
             self.tune_hyperparameters = tune_hyperparameters
 
+
     def get_training_data(self, feature_store, name: str, description) -> pd.DataFrame:
         """
          Retrieve training data from feature store and split into train/validation sets.
@@ -139,6 +140,7 @@ class ModelTrainer:
             logging.info("Error occurred trying to get model function")
             raise KeyError(f"Model {model_name} is not available")
 
+
     def track_model_parameters_with_mlflow(self, model,
                                             parameters: dict | None, 
                                             loss_metric: float,
@@ -172,6 +174,7 @@ class ModelTrainer:
         except Exception as e: 
             logging.info("Error Occured during tracking parameters with mlflow and dagshub")
             raise CustomException(e, sys)
+
 
     def PrepareTrainingData(self, data: Tuple[pd.DataFrame]) -> pd.DataFrame:
         """

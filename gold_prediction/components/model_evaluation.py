@@ -2,7 +2,8 @@ from gold_prediction.logging.logger import logging
 from gold_prediction.exception.exception import CustomException
 import os 
 import hopsworks
-
+import sys
+import pandas as pd 
 
 
 class ModelEvaluation:
@@ -14,7 +15,7 @@ class ModelEvaluation:
         )
         
 
-    def load_model(self, name: str): 
+    def load_model(self, name: str = "gold_model"): 
         """
         Loads model from hopsworks model registry 
 
@@ -27,14 +28,39 @@ class ModelEvaluation:
         return model 
     
     
-    def get_inference_data(self):
-        pass 
+    def get_inference_data(self) -> pd.DataFrame:
+        """
+        Retrieves test data from feature store 
+
+        Args: 
+            name
+
+            desc
+
+
+
+        """
+        try: 
+            logging.info("Get Feature View on Hopsworks")
+            feature_store = self.HOPSWORKS_PROJECT.get_feature_store()
+            feature_view = feature_store.get_feature_view(name = 'gold_price_prediction_test_data')
+            data = feature_view.get_training_data()
+            return data
+        except Exception as e: 
+            logging.error("Error Occured during reteriving inference data")
+            raise CustomException(e, sys)
+
 
 
     def InitializeModelEvaluation(self):
-        model = self.load_model(name=None)
+        model = self.load_model()
+        print(model)
+        data = self.get_inference_data()
+
+        print(model)
+        print(data)
 
 
 if __name__ == "__main__":
     modelEvaluation = ModelEvaluation(ModelEvaluationConfig=None)
-    modelEvaluation
+    modelEvaluation.InitializeModelEvaluation()
