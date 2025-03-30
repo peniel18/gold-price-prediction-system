@@ -33,9 +33,10 @@ class ModelEvaluation:
         Retrieves test data from feature store 
 
         Args: 
-            name
 
-            desc
+
+        Raises: 
+            CustomException
 
 
 
