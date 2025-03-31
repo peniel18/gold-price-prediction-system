@@ -38,20 +38,32 @@ class ModelEvaluation:
         Raises: 
             CustomException
 
-
-
         """
         try: 
+            
             logging.info("Get Feature View on Hopsworks")
+            # get a feature view 
             feature_store = self.HOPSWORKS_PROJECT.get_feature_store()
-            feature_view = feature_store.get_feature_view(name = 'gold_price_prediction_test_data')
-            data = feature_view.get_training_data()
-            return data
-        except Exception as e: 
-            logging.error("Error Occured during reteriving inference data")
-            raise CustomException(e, sys)
+            feature_view = feature_store.get_feature_view(name="gold_prediction_test_data")
+            data = feature_view.training_data(
+                descrption = "gold_prediction_test_data"
+            )
+            return data 
+        except: 
+            # create a feature view 
+            logging.info("Create a New feature View")
+            feature_store = self.HOPSWORKS_PROJECT.get_feature_store()
+            feature_group = feature_store.get_feature_group(name="gold_prediction_test_data")
+            columns_to_query = feature_group.select_all()
+            feature_view = feature_store.create_feature_view(
+                name = "gold_prediction_test_data",
+                query=columns_to_query
 
-
+            )
+            data = feature_view.training_data(
+                description="gold_prediction_test_data"
+            )
+            return data 
 
     def InitializeModelEvaluation(self):
         model = self.load_model()
