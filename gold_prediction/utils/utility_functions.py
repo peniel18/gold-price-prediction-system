@@ -23,6 +23,22 @@ def read_data(filepath: str) -> pd.DataFrame:
     return data
 
 
+def load_local_model(model_path: str, name: str): 
+    """
+    Loads local models 
+
+    Args: 
+        model_path: path of the model dir 
+
+        name: name of the model file 
+    
+    """
+    import joblib 
+    path = os.path.join(model_path, name)
+    model = joblib.load(path) 
+    return model 
+
+
 
 def ParametersTracker(model, params: dict, name: str):
     mlflow.set_tracking_uri("")

@@ -108,7 +108,7 @@ class ModelTrainer:
         """
         try: 
             model_registry = self.Hopswork_project.get_model_registry()
-            gold_model = model_registry.python.create_model(
+            gold_model = model_registry.sklearn.create_model(
                 name = "gold_model", 
                 description="Gold Prediction Model"
             )

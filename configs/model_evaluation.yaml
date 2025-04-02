@@ -1,0 +1,5 @@
+model_path: 
+   path: "Artifacts/model/"
+
+
+model_name: "lasso.pkl"

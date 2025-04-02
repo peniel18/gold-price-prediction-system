@@ -3,9 +3,11 @@ from gold_prediction.exception.exception import CustomException
 import os 
 import hopsworks
 from sklearn import metrics 
+from gold_prediction.utils.utility_functions import load_local_model
 import sys
 from typing import Tuple
 import pandas as pd 
+from omegaconf import OmegaConf
 
 
 class ModelEvaluation:
@@ -79,10 +81,13 @@ class ModelEvaluation:
         return df[columns]
     
 
-    def model_inference(self, data:pd.DataFrame) -> dict: 
+    def model_inference(self) -> dict: 
         data = self.get_inference_data()
         df = self.prepare_data_for_inference(data)
-        model = self.load_model()
+        model = load_local_model(
+            model_path=self.ModelEvaluationConfig.model_path.path, 
+            name=self.ModelEvaluationConfig.model_name
+        )
 
         yTest = df["close"]
         XTest = df.drop("close", axis="columns")
@@ -93,27 +98,24 @@ class ModelEvaluation:
         rmse = metrics.root_mean_squared_error(yTest, yHat)
         mape = metrics.mean_absolute_percentage_error(yTest, yHat)
 
-        metrics = {
+        metrics_ = {
             "Mean Squared Error": mse, 
             "Root Mean Squared Error": rmse, 
             "Mean Absolute Percentage Error" : mape
         }
 
-        return metrics
+        return metrics_
 
 
-    def log_metrics(self):
+    def log_metrics(self, metrics: dict):
         pass 
 
     def InitializeModelEvaluation(self):
-        model = self.load_model()
-        print(model)
-        data = self.get_inference_data()
-        print(data)
-        metrics = self.model_inference(data)
+        metrics = self.model_inference()
         print(metrics)
 
 
 if __name__ == "__main__":
-    modelEvaluation = ModelEvaluation(ModelEvaluationConfig=None)
+    config = OmegaConf.load("configs/model_evaluation.yaml")
+    modelEvaluation = ModelEvaluation(ModelEvaluationConfig=config)
     modelEvaluation.InitializeModelEvaluation()
