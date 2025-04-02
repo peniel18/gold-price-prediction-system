@@ -1,3 +1,6 @@
 .gold
 experiments.ipynb
 gold/
+
+.env
+/.env

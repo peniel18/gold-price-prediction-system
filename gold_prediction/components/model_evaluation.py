@@ -5,6 +5,8 @@ import hopsworks
 from sklearn import metrics 
 from gold_prediction.utils.utility_functions import load_local_model
 import sys
+import dagshub 
+import mlflow 
 from typing import Tuple
 import pandas as pd 
 from omegaconf import OmegaConf
@@ -81,13 +83,15 @@ class ModelEvaluation:
         return df[columns]
     
 
-    def model_inference(self) -> dict: 
+    def model_inference(self): 
         data = self.get_inference_data()
         df = self.prepare_data_for_inference(data)
         model = load_local_model(
             model_path=self.ModelEvaluationConfig.model_path.path, 
             name=self.ModelEvaluationConfig.model_name
         )
+
+        model_params = model.get_params()
 
         yTest = df["close"]
         XTest = df.drop("close", axis="columns")
@@ -104,14 +108,25 @@ class ModelEvaluation:
             "Mean Absolute Percentage Error" : mape
         }
 
-        return metrics_
+        return metrics_ , model_params
 
 
-    def log_metrics(self, metrics: dict):
-        pass 
+    def log_metrics(self, metrics: dict, params, experiment_name: str):
+        dagshub.init(repo_owner='peniel18', repo_name='gold-price-prediction-system', mlflow=True)
+        mlflow.set_experiment(experiment_name)
+
+        try:
+            with mlflow.start_run() as run: 
+                mlflow.log_metrics(metrics=metrics)
+                # log model params 
+                mlflow.log_params(params=params)
+
+        except Exception as e: 
+            raise CustomException(e, sys)
+        
 
     def InitializeModelEvaluation(self):
-        metrics = self.model_inference()
+        metrics, model_params = self.model_inference()
         print(metrics)
 
 
