@@ -44,6 +44,8 @@ class TrainingPipeline:
         except Exception as e: 
             logging.error("Error Occured in TrainingPipeline at Data Validation Stage")
             raise CustomException(e, sys)
+        
+
 
 
     def modelTrainer(self):
