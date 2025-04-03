@@ -1,0 +1,11 @@
+[2025-04-03 23:17:11,464] 52 hopsworks_common.client.external - INFO - Initializing external client
+[2025-04-03 23:17:11,464] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
+[2025-04-03 23:17:13,722] 134 hsfs.engine.python - INFO - Python Engine initialized.
+[2025-04-03 23:17:16,481] 51 root - INFO - Get Feature View on Hopsworks
+[2025-04-03 23:17:26,520] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2025-04-03 23:17:26,532] 107 dagshub - INFO - Accessing as peniel18
+[2025-04-03 23:17:27,646] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/peniel18/gold-price-prediction-system "HTTP/1.1 200 OK"
+[2025-04-03 23:17:28,464] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2025-04-03 23:17:28,467] 107 dagshub - INFO - Initialized MLflow to track repo "peniel18/gold-price-prediction-system"
+[2025-04-03 23:17:28,468] 107 dagshub - INFO - Repository peniel18/gold-price-prediction-system initialized!
+[2025-04-03 23:17:34,895] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.

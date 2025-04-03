@@ -127,7 +127,11 @@ class ModelEvaluation:
 
     def InitializeModelEvaluation(self):
         metrics, model_params = self.model_inference()
-        print(metrics)
+        self.log_metrics(
+            metrics=metrics, 
+            params=model_params,
+            experiment_name="Inference of test data"
+        )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,5 @@
 from gold_prediction.logging.logger import logging 
 from gold_prediction.exception.exception import CustomException 
-from gold_prediction.utils.utility_functions import ParametersTracker
 import pandas as pd 
 import optuna 
 from sklearn.metrics import mean_squared_error
