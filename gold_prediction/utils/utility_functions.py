@@ -39,6 +39,10 @@ def load_local_model(model_path: str, name: str):
     return model 
 
 
+def load_model(path: str): 
+    import joblib 
+    return joblib.load(path)
+
 
 def ParametersTracker(model, params: dict, name: str):
     mlflow.set_tracking_uri("")

@@ -5,7 +5,6 @@ from omegaconf import OmegaConf
 
 
 
-
 class InferencePipeline: 
     def __init__(self, InferencePipelineConfig):
         self.InferencePipelineConfig = InferencePipelineConfig
@@ -20,3 +19,7 @@ class InferencePipeline:
     def IntializeInferencePipeline(self):
         logging.info("Inference Pipeline Running")
         self.model_inference()
+
+
+if __name__ == "__main__":
+    InferencePipeline(InferencePipelineConfig=None).IntializeInferencePipeline()
