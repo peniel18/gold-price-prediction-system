@@ -75,11 +75,8 @@ class DataTransformation:
             df["lag_2"] = df["Close"].shift(2)
             df["lag_3"] = df["Close"].shift(3)
             #df.dropna(inplace=True)
-             
-            
             logging.info("Features Succesfully engineered")
             return df 
-        
         except Exception as e: 
             logging.error("Error Occurred during engineering features") 
             raise CustomException(e, sys)
