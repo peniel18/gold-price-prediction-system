@@ -3,6 +3,9 @@ from gold_prediction.logging.logger import logging
 from gold_prediction.utils.utility_functions import load_model
 import hopsworks
 from pathlib import Path
+import os 
+
+
 ### use hopsworks batch prediction feature 
 # 1. get data for batch predictions eg. get dates and create features based on this 
 # 2. batch predictions from model 
@@ -12,19 +15,23 @@ from pathlib import Path
 
 
 class BatchPredictionsPipeline: 
-    def __init__(self):
-        pass 
+    def __init__(self, BatchPredsConfig):
+        self.BatchPredsConfig = BatchPredsConfig
+        self.hopsworks_project = hopsworks.login(
+            api_key_file=os.getenv("HOPSWORKS_API_KEY")
+        )
 
 
     def get_predictions_data(self):
         """
-        computes data from dates for predictions 
-        
-        
+        Gets data from feature store for batch predictions 
         """
-        
-        
-        pass 
+        feature_store = self.hopsworks_project.get_feature_store()
+
+
+
+
+
 
     
     def load_model_from_model_registry(self, hopsworks_project, model_version: int = 1):
@@ -45,7 +52,7 @@ class BatchPredictionsPipeline:
         return model 
 
     
-    def predictions(model, data): 
+    def predictions(self, model, data): 
         pass 
 
 
