@@ -59,6 +59,7 @@ class TrainingPipeline:
         
 
     def InitailizeTrainingPipeline(self):
+        logging.info("Training Pipeline Running ... ")
         self.dataIngestion()
         self.dataTransformation()
         self.dataValidation()
