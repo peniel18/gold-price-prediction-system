@@ -13,10 +13,10 @@ class PredictionsFeatures:
     def __init__(self, PredictionFeatureConfig):
         self.PredictionFeatureConfig = PredictionFeatureConfig
         self.HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
-        self.hopsworks_project = hopsworks.login(api_key_value=HOPSWORKS_API)
+        self.hopsworks_project = hopsworks.login(api_key_value=os.getenv("HOPSWORKS_API"))
 
 
-    def make_predictions_data(start_date=None, end_date=None) -> pd.DataFrame:
+    def make_predictions_data(self, start_date=None, end_date=None) -> pd.DataFrame:
         """
         Create training data based on start and end dates
 
@@ -117,7 +117,7 @@ class PredictionsFeatures:
 
 
     def IntializeFeatures(self):
-        data = self.make_predictions_data(None, None)
+        data = self.make_predictions_data(start_date=None, end_date=None)
         self.store_data_on_feature_store(data)
 
 

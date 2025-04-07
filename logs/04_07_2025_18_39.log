@@ -1,0 +1,8 @@
+[2025-04-07 18:39:19,134] 52 hopsworks_common.client.external - INFO - Initializing external client
+[2025-04-07 18:39:19,134] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
+[2025-04-07 18:39:21,642] 134 hsfs.engine.python - INFO - Python Engine initialized.
+[2025-04-07 18:39:25,489] 107 root - INFO - Inserting data into feature store
+[2025-04-07 18:39:25,490] 85 root - INFO - Getting feature store for predictions features
+[2025-04-07 18:39:25,952] 95 root - INFO - Creating feature store
+[2025-04-07 18:39:26,991] 115 root - ERROR - Error Occurred during data ingestion of batch features
+[2025-04-07 18:39:27,795] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.
