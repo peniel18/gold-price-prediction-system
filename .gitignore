@@ -4,3 +4,6 @@ gold/
 
 .env
 /.env
+env/
+.venv/ 
+/.venv 
