@@ -69,6 +69,7 @@ class TrainingPipeline:
 
 
 if __name__ == "__main__":
+    
     config = None 
     training_pipeline = TrainingPipeline(TrainingPipelineConfig=config)
     training_pipeline.InitailizeTrainingPipeline()

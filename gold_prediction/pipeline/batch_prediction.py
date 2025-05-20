@@ -4,7 +4,8 @@ from gold_prediction.utils.utility_functions import load_model
 import hopsworks
 from pathlib import Path
 import os 
-
+from omegaconf import OmegaConf
+import pandas as pd 
 
 ### use hopsworks batch prediction feature 
 # 1. get data for batch predictions eg. get dates and create features based on this 
@@ -32,10 +33,10 @@ class BatchPredictionsPipeline:
         """
         try: 
             feature_store = self.hopsworks_project.get_feature_store()
-            feature_view = feature_store.get_feature_view(name=description)
+            feature_view = feature_store.get_feature_view(name=name)
             data = feature_view.get_batch_data(
-                start_time = None , 
-                end_time = None 
+               # start_time = "2025-02-01", 
+               # end_time = "2025-05-31" 
             )
             return data 
         except: 
@@ -49,8 +50,8 @@ class BatchPredictionsPipeline:
             )
 
             data = feature_view.get_batch_data(
-                start_time = None , 
-                end_time = None
+               # start_time = "2025-02-01" , 
+               # end_time = "2025-05-31"
             )
             return data
 
@@ -67,26 +68,55 @@ class BatchPredictionsPipeline:
 
         """
         model_registry = hopsworks_project.get_model_registry()
-        model_registry_reference = model_registry.get_model(name="", version=model_version)
+        model_registry_reference = model_registry.get_model(name="gold_model", version=model_version)
         model_dir = model_registry_reference.download()
-        model_path = Path(model_dir) + "lasso.pkl"
+        print(model_dir)
+        model_path = Path(model_dir) / "lasso"
         model = load_model(model_path)
         return model 
 
     
-    def predictions(self, model, data): 
-        pass 
+    def make_predictions(self, model, data): 
+        columns = ['agg_mean', 'agg_max', 'agg_std', 'agg_min', 'kurt',
+                     'skewness', 'month', 'year', 'day', 'dayofweek', 'is_weekend', 'dayofyear', 'quarter']
+        dates = data["dates"]
+        print(dates)
+        df = data[columns]
+        y_preds = model.predict(df)
+        print(y_preds)
+        print(len(y_preds))
+        predictions = pd.DataFrame({
+            "dates" : dates, 
+            "predictions" : y_preds
+        })
+        predictions.to_csv(self.BatchPredsConfig.PredictionsPath, index=False)
+        return predictions
 
 
-    def save_predictions(self): 
+    def save_predictions_on_cloud(self): 
         """
         Save batch predictions on cloud 
         
         """
+        return 
+
 
     def InitializeBatchPredictionsPipeline(self): 
         data = self.get_predictions_data(
             name="batch_predictions_data", 
-            description="batch predictions data for batch predicitions"
+            description="batch_predictions_data_for_batch_predicitions"
         )
-    
+        # get model from hopsworks 
+        model = self.load_model_from_model_registry(self.hopsworks_project)
+        print(model)
+        self.make_predictions(model=model, data=data)
+
+
+
+
+if __name__ == "__main__":
+    BatchPredsConfig = OmegaConf.load("configs/batch_features_pipeline.yaml")
+    batchPipeline = BatchPredictionsPipeline(
+        BatchPredsConfig=BatchPredsConfig, 
+    )
+    batchPipeline.InitializeBatchPredictionsPipeline()
