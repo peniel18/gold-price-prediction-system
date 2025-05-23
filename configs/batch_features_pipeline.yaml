@@ -2,3 +2,7 @@ feature_group_name: "batch_predictions_data"
 feature_group_description: "batch predictions data for batch predicitions"
 
 PredictionsPath: "Artifacts/batch_preds.csv"
+
+
+AWS_S3_KEY: "jANrUY9jioReYRnx/OcDSPUKHlCMqqm3+FDj0rE6"
+BUCKET_NAME: "batchpredictions1"

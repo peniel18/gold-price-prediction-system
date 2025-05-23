@@ -64,9 +64,6 @@ class PredictionsFeatures:
         return df 
 
 
-
-
-
     def create_or_get_feature_group(self, 
                                     name, 
                                     description, 
