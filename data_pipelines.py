@@ -2,7 +2,6 @@ from prefect import flow, task
 from gold_prediction.pipeline.training_pipeline import  TrainingPipeline
 from gold_prediction.pipeline.inference_pipeline import InferencePipeline
 from gold_prediction.pipeline.batch_prediction import BatchPredictionsPipeline
-from gold_prediction.components.predictions_data import PredictionsFeatures
 from omegaconf import OmegaConf 
 
 
@@ -19,12 +18,6 @@ def run_inference_pipeline():
     inference_pipeline = InferencePipeline(InferencePipelineConfig=None)
     inference_pipeline.IntializeInferencePipeline()
 
-@task 
-def run_predictions_data(): 
-    config = OmegaConf.load("configs/batch_features_pipeline.yaml")
-    prediction_features = PredictionsFeatures(PredictionFeatureConfig=config)
-    prediction_features.IntializeFeatures()
-
 
 @task
 def run_batch_prediction_pipeline():
@@ -37,7 +30,6 @@ def run_batch_prediction_pipeline():
 def main_flow():
     run_training_pipeline()
     run_inference_pipeline()
-    run_predictions_data()
     run_batch_prediction_pipeline()
 
 

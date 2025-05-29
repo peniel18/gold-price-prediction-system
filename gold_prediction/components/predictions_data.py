@@ -17,6 +17,7 @@ class PredictionsFeatures:
             api_key_value=self.HOPSWORKS_API
         )
 
+
     def make_predictions_data(self, start_date=None, end_date=None) -> pd.DataFrame:
         """
         Create training data based on start and end dates
