@@ -2,6 +2,7 @@ from prefect import flow, task
 from gold_prediction.pipeline.training_pipeline import  TrainingPipeline
 from gold_prediction.pipeline.inference_pipeline import InferencePipeline
 from gold_prediction.pipeline.batch_prediction import BatchPredictionsPipeline
+from gold_prediction.components.predictions_data import PredictionsFeatures
 from omegaconf import OmegaConf 
 
 
@@ -15,26 +16,29 @@ def run_training_pipeline():
 
 @task
 def run_inference_pipeline():
-    # load the configuration for the inference pipeline
-    inference_pipeline_config = OmegaConf.load("configs/inference_pipeline.yaml")
-    # Initialize the inference pipeline with the loaded configuration
-    inference_pipeline = InferencePipeline(InferencePipelineConfig=inference_pipeline_config)
-    inference_pipeline.InitializeInferencePipeline()
+    inference_pipeline = InferencePipeline(InferencePipelineConfig=None)
+    inference_pipeline.IntializeInferencePipeline()
+
+@task 
+def run_predictions_data(): 
+    config = OmegaConf.load("configs/batch_features_pipeline.yaml")
+    prediction_features = PredictionsFeatures(PredictionFeatureConfig=config)
+    prediction_features.IntializeFeatures()
 
 
 @task
-def run_inference_pipeline_batch():
-    batch_prediction_pipeline_config = OmegaConf.load("configs/batch_prediction.yaml")  
-    # Initialize the batch prediction pipeline with the loaded configuration
-    batch_prediction_pipeline = BatchPredictionsPipeline(BatchPredsConfig=batch_prediction_pipeline_config)
-    batch_prediction_pipeline.InitializeBatchPredictionPipeline()
+def run_batch_prediction_pipeline():
+    BatchPredsConfig = OmegaConf.load("configs/batch_features_pipeline.yaml")
+    batch_prediction_pipeline = BatchPredictionsPipeline(BatchPredsConfig=BatchPredsConfig)
+    batch_prediction_pipeline.InitializeBatchPredictionsPipeline()
 
 
 @flow(name="main_flow")
 def main_flow():
     run_training_pipeline()
     run_inference_pipeline()
-    run_inference_pipeline_batch()
+    run_predictions_data()
+    run_batch_prediction_pipeline()
 
 
 if __name__ == "__main__":

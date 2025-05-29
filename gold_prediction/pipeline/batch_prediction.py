@@ -5,9 +5,11 @@ import hopsworks
 from pathlib import Path
 import os 
 from omegaconf import OmegaConf
+from dotenv import load_dotenv
 import pandas as pd 
 import boto3 
 
+load_dotenv()
 ### use hopsworks batch prediction feature 
 # 1. get data for batch predictions eg. get dates and create features based on this 
 # 2. batch predictions from model 
@@ -18,8 +20,9 @@ import boto3
 class BatchPredictionsPipeline: 
     def __init__(self, BatchPredsConfig):
         self.BatchPredsConfig = BatchPredsConfig
+        self.HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
         self.hopsworks_project = hopsworks.login(
-            api_key_file=os.getenv("HOPSWORKS_API_KEY")
+            api_key_value=self.HOPSWORKS_API
         )
 
 
@@ -119,7 +122,7 @@ class BatchPredictionsPipeline:
         self.save_predictions_on_cloud(
             file_path=self.BatchPredsConfig.PredictionsPath, 
             bucket_name=self.BatchPredsConfig.BUCKET_NAME, 
-            s3_key=self.BatchPredsConfig.AWS_S3_KEY
+            s3_key=os.getenv("AWS_S3_KEY")
         )
 
 

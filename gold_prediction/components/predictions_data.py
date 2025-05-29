@@ -13,8 +13,9 @@ class PredictionsFeatures:
     def __init__(self, PredictionFeatureConfig):
         self.PredictionFeatureConfig = PredictionFeatureConfig
         self.HOPSWORKS_API = os.getenv("HOPSWORKS_API_KEY")
-        self.hopsworks_project = hopsworks.login(api_key_value=os.getenv("HOPSWORKS_API"))
-
+        self.hopsworks_project = hopsworks.login(
+            api_key_value=self.HOPSWORKS_API
+        )
 
     def make_predictions_data(self, start_date=None, end_date=None) -> pd.DataFrame:
         """
