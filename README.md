@@ -25,23 +25,28 @@ A serverless solution to predict gold prices using real-time data from Yahoo Fin
    cd gold-price-prediction-system
    ```
 
-2. **Create and activate a virtual environment:**
+2. **Install uv package manager: **
+   ``` sh 
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+
+3. **Create and activate a virtual environment:**
    ```sh
-   python3 -m venv venv
+   uv venv 
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    ```
 
-3. **Install dependencies:**
+4. **Install dependencies:**
    ```sh
    uv pip install -r requirements.txt
    ```
 
-4. **Set up your `PYTHONPATH`:**
+5. **Set up your `PYTHONPATH`:**
    ```sh
    export PYTHONPATH="$PYTHONPATH:/path/to/your/project"
    ```
 
-5. **Configure AWS S3:**
+6. **Configure AWS S3:**
    - Install AWS CLI: `uv pip install awscli`
    - Configure credentials:
      ```sh
@@ -49,7 +54,7 @@ A serverless solution to predict gold prices using real-time data from Yahoo Fin
      ```
    - Ensure your S3 bucket exists and update your configs with the bucket name.
 
-6. **Configure Prefect:**
+7. **Configure Prefect:**
    - Install Prefect: `uv pip install prefect`
    - Set up Prefect backend/cloud if needed.
    - Register and run flows as described in your pipeline scripts.
