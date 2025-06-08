@@ -25,8 +25,8 @@ A serverless solution to predict gold prices using real-time data from Yahoo Fin
    cd gold-price-prediction-system
    ```
 
-2. **Install uv package manager: **
-   ``` sh 
+2. **Install uv package manager:**
+   ```sh 
    curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
 
