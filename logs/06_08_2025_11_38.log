@@ -1,5 +1,0 @@
-[2025-06-08 11:39:03,678] 1352 botocore.credentials - INFO - Found credentials in shared credentials file: ~/.aws/credentials
-[2025-06-08 11:39:05,732] 54 root - ERROR - Error occurred while loading predictions from S3 bucket: module 'pandas.compat' has no attribute 'StringIO'
-[2025-06-08 11:40:43,118] 54 root - ERROR - Error occurred while loading predictions from S3 bucket: module 'pandas.compat' has no attribute 'StringIO'
-[2025-06-08 11:43:18,664] 54 root - ERROR - Error occurred while loading predictions from S3 bucket: module 'pandas.compat' has no attribute 'StringIO'
-[2025-06-08 11:43:32,430] 54 root - ERROR - Error occurred while loading predictions from S3 bucket: module 'pandas.compat' has no attribute 'StringIO'

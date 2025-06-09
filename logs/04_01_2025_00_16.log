@@ -1,6 +1,0 @@
-[2025-04-01 00:16:25,829] 52 hopsworks_common.client.external - INFO - Initializing external client
-[2025-04-01 00:16:25,829] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
-[2025-04-01 00:16:29,602] 134 hsfs.engine.python - INFO - Python Engine initialized.
-[2025-04-01 00:16:33,315] 46 root - INFO - Get Feature View on Hopsworks
-[2025-04-01 00:16:46,959] 46 root - INFO - Get Feature View on Hopsworks
-[2025-04-01 00:19:32,574] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.

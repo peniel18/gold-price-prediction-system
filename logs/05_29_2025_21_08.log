@@ -1,6 +1,0 @@
-[2025-05-29 21:08:20,471] 52 hopsworks_common.client.external - INFO - Initializing external client
-[2025-05-29 21:08:20,471] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
-[2025-05-29 21:08:22,837] 134 hsfs.engine.python - INFO - Python Engine initialized.
-[2025-05-29 21:08:26,782] 47 root - INFO - Creating a Feature View for batch predictions data
-[2025-05-29 21:08:36,565] 1352 botocore.credentials - INFO - Found credentials in shared credentials file: ~/.aws/credentials
-[2025-05-29 21:08:37,129] 240 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.

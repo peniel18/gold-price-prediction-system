@@ -1,6 +1,0 @@
-[2025-03-29 17:29:38,339] 52 hopsworks_common.client.external - INFO - Initializing external client
-[2025-03-29 17:29:38,339] 59 hopsworks_common.client.external - INFO - Base URL: https://c.app.hopsworks.ai:443
-[2025-03-29 17:29:46,276] 134 hsfs.engine.python - INFO - Python Engine initialized.
-[2025-03-29 17:29:52,642] 44 root - INFO - Get Feature View on Hopsworks
-[2025-03-29 17:29:53,558] 50 root - ERROR - Error Occured during reteriving inference data
-[2025-03-29 17:29:53,842] 233 hopsworks_common.client.external - INFO - Closing external client and cleaning up certificates.
