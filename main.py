@@ -9,6 +9,7 @@ from typing import List, Optional, Dict, Any
 from datetime import datetime
 import pandas as pd 
 import os
+import io
 from dotenv import load_dotenv
 load_dotenv()  
 
@@ -33,7 +34,11 @@ def load_predictions_from_s3_bucket(bucket_name: str, s3_key: str) -> pd.DataFra
         response = s3_client.get_object(Bucket=bucket_name, Key=s3_key)
         # read csv data from the response
         data = response['Body'].read().decode('utf-8')
-        df = pd.read_csv(pd.compat.StringIO(data), parse_dates=["dates"])
+        df = pd.read_csv(io.StringIO(data), parse_dates=["dates"])
+        # data should be sorted by dates 
+        df.sort_values(by="dates", inplace=True)
+        df.reset_index(drop=True, inplace=True)
+        #df = pd.read_csv(pd.compat.StringIO(data), parse_dates=["dates"])
         logging.info("Successfully loaded predictions from S3 bucket")
         return df
     except ClientError as e: 
@@ -82,18 +87,33 @@ config = PredictionsConfig()
 
 
 @app.get("/predictions", response_model=PredictionResponse)
-async def get_predictions(request: Request,
-                          bucket_name: str = config.BUCKET_NAME,
-                          s3_key: str = config.S3_KEY,
-                          limit: Optional[int] = 7,
+async def get_predictions(limit: Optional[int] = 7,
                           offset: Optional[int] = 0,
 ): 
-    """Gets predictions from S3 bucket within a date range or limit"""
+    """Gets predictions from S3 bucket within a date range or limit
+    
+    Args: 
+        bucket_name (str): The name of the S3 bucket where predictions are stored.
+        s3_key (str): The key of the S3 object containing the predictions data.
+        limit (int, optional): The maximum number of predictions to return. Defaults to 7.
+        offset (int, optional): The number of records to skip before starting to return predictions. Defaults to 0.
+
+
+    Returns:
+        PredictionResponse: A response model containing predictions, total count, timestamp, and metadata.
+    Raises:
+        HTTPException: If there is an error accessing the S3 bucket or if the limit exceeds the maximum allowed.
+        HTTPException: If the limit exceeds the maximum allowed limit.
+        HTTPException: If the S3 bucket or key is not found.
+        HTTPException: If there is an error accessing the S3 bucket.
+        HTTPException: If there is an error loading predictions from the S3 bucket.
+    
+    """
 
     if limit > config.MAX_LIMIT:
         raise HTTPException(status_code=400, detail=f"Limit cannot exceed {config.MAX_LIMIT} days")     
     
-    df = load_predictions_from_s3_bucket(bucket_name, s3_key)
+    df = load_predictions_from_s3_bucket(config.BUCKET_NAME, config.S3_KEY)
     total_count = len(df)
 
     if limit: 
@@ -107,8 +127,8 @@ async def get_predictions(request: Request,
         timestamp=datetime.now().isoformat(),
         returned_count=len(predictions),
         metadata={
-            "bucket_name": bucket_name,
-            "s3_key": s3_key,
+            "bucket_name": config.BUCKET_NAME,
+            "s3_key": config.S3_KEY,
             "limit": limit,
             "offset": offset
         }

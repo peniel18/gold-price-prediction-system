@@ -1,0 +1,2 @@
+[2025-06-09 19:02:52,906] 1352 botocore.credentials - INFO - Found credentials in shared credentials file: ~/.aws/credentials
+[2025-06-09 19:02:54,682] 42 root - INFO - Successfully loaded predictions from S3 bucket

@@ -36,3 +36,9 @@ else:
     st.caption("Gold Price Prediction System | Streamlit Dashboard")
 
     st.info(" Fetch Batch Predictions for other days.")
+    # create a form to get user input for date range
+    with st.form("date_range_form"):
+        start_date = st.date_input("Start Date", value=week_df["dates"].min())
+        end_date = st.date_input("End Date", value=week_df["dates"].max())
+        submit_button = st.form_submit_button("Fetch Predictions")
+    
